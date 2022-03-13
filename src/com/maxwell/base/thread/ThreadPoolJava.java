@@ -14,13 +14,11 @@ public class ThreadPoolJava {
 
     public static void main(String[] args) {
 
-        ThreadPoolExecutor threadPool= new ThreadPoolExecutor(10, 15, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+        ThreadPoolExecutor threadPool= new ThreadPoolExecutor
+                (10, 15, 60,
+                        TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
-        threadPool.execute(new Runnable(){
-
-            @Override
-            public void run() {
-
+        threadPool.execute(()->{
                 for (int i = 0; i < Integer.MAX_VALUE; i++) {
                             System.out.println("执行任务!");
                     try {
@@ -30,8 +28,6 @@ public class ThreadPoolJava {
                     }
 
                 }
-            }
-
         });
 
 
