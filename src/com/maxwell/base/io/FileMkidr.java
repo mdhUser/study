@@ -29,26 +29,6 @@ public class FileMkidr {
             System.out.println(file.createNewFile());
 
 
-        System.out.println(deleteALlFile(file));
-
-    }
-
-    /**
-     * 递归删除路劲所有文件
-     *
-     * @param file
-     * @return
-     */
-    static boolean deleteALlFile(File file) {
-        var delete = file.getAbsoluteFile().delete();
-        File f = file.getParentFile();
-        if (delete)
-            deleteALlFile(f);
-        if (file.getParent()!=null)
-            return !new File(file.getParent()).exists();
-        else
-            return true;
-
     }
 
 }
