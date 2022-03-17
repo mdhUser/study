@@ -1,10 +1,7 @@
 package com.maxwell.base.io;
 
-import com.maxwell.jdk.jdk8.function.PredicateDemo;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.Year;
 import java.util.Properties;
 import java.util.ResourceBundle;
 

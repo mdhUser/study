@@ -18,17 +18,16 @@ public class BufferStreamDemo {
             e.printStackTrace();
         }
 
-
     }
 
     private static void copy() throws IOException {
 
-        long start =System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         try (FileOutputStream fos = new FileOutputStream("src/com/maxwell/base/gm.mp4");
              FileInputStream fis = new FileInputStream("F:\\Downloads\\IDMDownload\\video\\鬼灭.mp4")) {
             BufferedInputStream bis = new BufferedInputStream(fis);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
-            byte[] data = new byte[1024*8];
+            byte[] data = new byte[1024 * 8];
             int d;
             while ((d = fis.read(data)) != -1) {
                 fos.write(data, 0, d);
@@ -38,8 +37,8 @@ public class BufferStreamDemo {
             bis.close();
 
         }
-        long end =System.currentTimeMillis();
-        System.out.println("time difference ="+(end-start));
+        long end = System.currentTimeMillis();
+        System.out.println("time difference =" + (end - start));
 
     }
 
