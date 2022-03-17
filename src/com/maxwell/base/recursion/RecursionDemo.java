@@ -1,11 +1,6 @@
 package com.maxwell.base.recursion;
 
-import com.maxwell.base.annotation.myhibernate.Id;
-
-import java.io.File;
 import java.math.BigInteger;
-
-import static com.maxwell.base.recursion.FileRecursion.deleteALlFile;
 
 /**
  * @description:
