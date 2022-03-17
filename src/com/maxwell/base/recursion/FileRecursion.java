@@ -2,9 +2,7 @@ package com.maxwell.base.recursion;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @description: 文件递归操作
@@ -76,5 +74,20 @@ public class FileRecursion {
 
     }
 
+    /**
+     * 递归拷贝文件
+     *
+     * @param file
+     * @param newFile
+     * @return
+     */
+    public static Map<File, List<File>> copyD(File file, File newFile) {
+        Map<File, List<File>> map = new HashMap<>();
+        if (file.isFile()) throw new RuntimeException("这不是文件夹");
+        if (file.isDirectory()) {
+            map.put(file, Arrays.asList(file.listFiles()));
+        }
+        return map;
+    }
 
 }

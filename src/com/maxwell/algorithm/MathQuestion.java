@@ -1,4 +1,4 @@
-package com.maxwell.base.other;
+package com.maxwell.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;

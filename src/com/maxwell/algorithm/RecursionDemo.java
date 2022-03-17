@@ -1,11 +1,4 @@
-package com.maxwell.base.recursion;
-
-import com.maxwell.base.annotation.myhibernate.Id;
-
-import java.io.File;
-import java.math.BigInteger;
-
-import static com.maxwell.base.recursion.FileRecursion.deleteALlFile;
+package com.maxwell.algorithm;
 
 /**
  * @description:
@@ -46,7 +39,7 @@ public class RecursionDemo {
 
     public static void main(String[] args) {
 
-        System.out.println(go(50));
+        System.out.println(go(100));
 
     }
 
@@ -56,18 +49,18 @@ public class RecursionDemo {
      * @param step
      * @return
 a     */
-    public static BigInteger go(int step) {
+    public static int go(int step) {
         if (step >= 1) {
             if (step == 1)
-                return new BigInteger("1");
+                return 1;
             else if (step == 2)
-                return  new BigInteger("1").add(go(step-1));
+                return 1 + go(step - 1);
             else if (step==3)
-                return new BigInteger("2").add(go(step-1));
+                return 1+go(step-1)+1;
             else
-                return go(step - 1).add(go(step - 2)).add(go(step-3));
+                return go(step - 1) + go(step - 2)+go(step-3);
         } else {
-            return new BigInteger("-1");
+            return -1;
         }
 
     }
