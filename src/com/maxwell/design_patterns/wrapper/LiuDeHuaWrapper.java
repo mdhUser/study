@@ -16,8 +16,7 @@ public class LiuDeHuaWrapper implements Star {
 
     @Override
     public void sing() {
-        liuDeHua.sing();
-        System.out.print("演唱一曲《忘情水》\n");
+        System.out.print("天王唱歌，演唱一曲《忘情水》\n");
     }
 
     @Override
