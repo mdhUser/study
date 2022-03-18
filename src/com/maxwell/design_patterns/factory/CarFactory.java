@@ -25,7 +25,6 @@ public class CarFactory {
         Car car1 =productCar(CarType.FALALI);
         car1.run();
 
-
     }
 
 }
