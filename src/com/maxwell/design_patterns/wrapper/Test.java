@@ -14,7 +14,6 @@ public class Test {
         wrapper.sing();
         wrapper.dance();
 
-
     }
 
 }
