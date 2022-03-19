@@ -20,22 +20,19 @@ public class ClientDemo {
         //1.创建客户端的Socket对象
         Scanner sc = new Scanner(System.in);
         Socket socket = new Socket("127.0.0.1", 8888);
-        OutputStream out = socket.getOutputStream();
-        out.write("fuck U!".getBytes(StandardCharsets.UTF_8));
         while (true) {
-            Socket s = new Socket("127.0.0.1", 8888);
-            var o = s.getOutputStream();
-            var in = s.getInputStream();
+            System.out.println("请输入回复信息:");
+            OutputStream out = socket.getOutputStream();
+            String msg = sc.next();
+            out.write(msg.getBytes(StandardCharsets.UTF_8));
+            InputStream in = socket.getInputStream();
             byte[] data = new byte[1024];
-            int read = in.read(data);
-            if (read==-1){
-                socket.close();
-                continue;
+            int len=in.read(data);
+            System.out.println("客户端收到服务端数据：" + new String(data, 0, len));
+            if ("886".equals(msg)) {
+                System.out.println("结束通话");
+                break;
             }
-            System.out.println("客户端接受数据：" + new String(data, 0, read));
-            System.out.println("输入回复信息：");
-            String next = sc.next();
-            o.write(next.getBytes(StandardCharsets.UTF_8));
         }
 
         //todo 关闭socket

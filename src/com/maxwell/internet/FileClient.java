@@ -22,7 +22,6 @@ public class FileClient {
 
         FileInputStream fis = new FileInputStream("d:/lz/图片/地铁少女.jpg");
 
-//        var fos = new FileOutputStream("src/com/maxwell/das.jpg");
 
         byte[] data = new byte[1024];
         int len;
