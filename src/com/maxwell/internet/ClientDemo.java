@@ -21,7 +21,7 @@ public class ClientDemo {
         Scanner sc = new Scanner(System.in);
         Socket socket = new Socket("127.0.0.1", 8888);
         while (true) {
-            System.out.println("请输入回复信息:");
+            System.out.println("请输入发送复信息:");
             OutputStream out = socket.getOutputStream();
             String msg = sc.next();
             out.write(msg.getBytes(StandardCharsets.UTF_8));
@@ -35,9 +35,6 @@ public class ClientDemo {
             }
         }
 
-        //todo 关闭socket
-//        socket.close();
-
     }
 }
 
@@ -45,20 +42,28 @@ class ServerDemo {
 
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(8888);
-        Scanner sc = new Scanner(System.in);
+
         while (true) {
             System.out.println("等待客户端连接~~");
+            Scanner sc = new Scanner(System.in);
             var accept = serverSocket.accept();
-            InputStream in = accept.getInputStream();
-            byte[] data = new byte[1024];
-            int read = in.read(data);
-            System.out.println("服务端接受数据：" + new String(data, 0, read));
-            System.out.println("输入回复信息：");
-            String next = sc.next();
-            OutputStream out = accept.getOutputStream();
-            out.write(next.getBytes(StandardCharsets.UTF_8));
+            while (true) {
+                InputStream in = accept.getInputStream();
+                byte[] data = new byte[1024];
+                int read = in.read(data);
+                System.out.println("服务端接受数据：" + new String(data, 0, read));
+                System.out.println("输入回复信息：");
+                String next = sc.next();
+                OutputStream out = accept.getOutputStream();
+                out.write(next.getBytes(StandardCharsets.UTF_8));
+                if ("886".equals(next)){
+                    System.out.println("结束会话");
+                    break;
+                }
+            }
             accept.close();
         }
+
     }
 
 }
