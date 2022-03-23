@@ -32,7 +32,6 @@ public class BufferStreamDemo {
             while ((d = fis.read(data)) != -1) {
                 fos.write(data, 0, d);
             }
-
             bos.close();
             bis.close();
 
