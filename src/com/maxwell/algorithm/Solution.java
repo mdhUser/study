@@ -1,7 +1,7 @@
 package com.maxwell.algorithm;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.Arrays;
 
 public class Solution {
 
@@ -35,4 +35,30 @@ public class Solution {
     }
 
 
+}
+
+class Solution1 {
+
+    public static void main(String[] args) {
+        int n[] = {1, 5, 6};
+        int[] ints = missingRolls(n, 3, 4);
+        System.out.println(Arrays.toString(ints));
+
+    }
+
+    public static int[] missingRolls(int[] rolls, int mean, int n) {
+        int m = rolls.length;
+        int sum = mean * (m + n);
+        int missingSum = sum;
+        for (int roll : rolls) {
+            missingSum -= roll;
+        }
+        if (missingSum < n || missingSum > 6 * n) return new int[n];
+        int[] ns = new int[n];
+        int q = missingSum / n, mod = missingSum % n;
+        for (int i = 0; i < ns.length; i++) {
+            ns[i] = q + (i < mod ? 1 : 0);
+        }
+        return ns;
+    }
 }
