@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @date: 2022/2/21 14:07
  */
 
-//@JDBCConfig(ip = "localhost" , userName = "root" , password = "root" , encoding = "UTF-8" , database = "mdh")
+@JDBCConfig(ip = "localhost" , userName = "root" , password = "root" , encoding = "UTF-8" , database = "mdh")
 @JDBCConfig(ip = "localhost" , userName = "root" , password = "root" , encoding = "UTF-8" , database = "mdh")//@Repeatable可赋值多个注解
 public class DBUtil {
 

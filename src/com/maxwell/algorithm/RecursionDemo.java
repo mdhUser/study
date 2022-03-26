@@ -18,10 +18,8 @@ public class RecursionDemo {
      */
     public static void factorial(Integer num) {
         total *= num;
-        if (num > 1)
-            factorial(num - 1);
-        else
-            System.out.println(total);
+        if (num > 1) factorial(num - 1);
+        else System.out.println(total);
     }
 
     /**
@@ -31,10 +29,8 @@ public class RecursionDemo {
      * @return
      */
     public static long jc(Integer num) {
-        if (num == 1)
-            return 1;
-        else
-            return num * jc(num - 1);
+        if (num == 1) return 1;
+        else return num * jc(num - 1);
     }
 
     public static void main(String[] args) {
@@ -47,22 +43,17 @@ public class RecursionDemo {
      * 递归走台阶
      *
      * @param step
-     * @return
-a     */
+     * @return a
+     */
     public static int go(int step) {
         if (step >= 1) {
-            if (step == 1)
-                return 1;
-            else if (step == 2)
-                return 1 + go(step - 1);
-            else if (step==3)
-                return 1+go(step-1)+1;
-            else
-                return go(step - 1) + go(step - 2)+go(step-3);
+            if (step == 1) return 1;
+            else if (step == 2) return 1 + go(step - 1);
+            else if (step == 3) return 1 + go(step - 1) + 1;
+            else return go(step - 1) + go(step - 2) + go(step - 3);
         } else {
             return -1;
         }
-
     }
 
 
