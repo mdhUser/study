@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<books xmlns="http://www.maxwell.cn">
+
+    <book>
+        <name>java虚拟机详解</name>
+        <author>毛狄辉</author>
+        <sale>15.54</sale>
+    </book>
+    <book>
+        <name>Maxwell自传</name>
+        <author>毛狄辉</author>
+        <sale>1000</sale>
+    </book>
+
+</books>

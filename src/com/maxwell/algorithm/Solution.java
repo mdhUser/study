@@ -62,3 +62,21 @@ class Solution1 {
         return ns;
     }
 }
+
+class Solution2{
+
+    public static void main(String[] args) {
+        printOut(73734566);
+    }
+
+    public static void printOut(int n){
+        if (n>=10)
+            printOut(n/10);
+        printDigit(n%10);
+    }
+
+    private static void printDigit(int i) {
+        System.out.print(i);
+    }
+
+}

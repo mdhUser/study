@@ -13,21 +13,23 @@ public class InnerDemo {
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
 
         Out out = new Out();
-        out.id="hmx";
         Class<Out> outClass = Out.class;
         Field oid = outClass.getDeclaredField("id");
-        String o = (String) oid.get(out);
-        System.out.println(o);
+        oid.setAccessible(true);
+        oid.set(out,"maxwell");
+        System.out.println(out.getId());
     }
 
-    /**
-     * @description:
-     * @author: Maxwell
-     * @email: maodihui@foxmail.com
-     * @date: 2022/3/26 22:49
-     */
-
 }
+
 class Out {
-     String id;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
