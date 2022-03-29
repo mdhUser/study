@@ -18,4 +18,9 @@ public class Zxzz implements Singer {
     public void dance(double money) {
         System.out.println("左小诅咒跳舞收钱:"+money);
     }
+
+    public void ttt(){
+        System.out.println("this is ttt");
+    }
+
 }

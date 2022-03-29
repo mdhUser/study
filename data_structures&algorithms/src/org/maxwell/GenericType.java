@@ -1,13 +1,12 @@
-package com.maxwell.jdk;
+package org.maxwell;
 
 /**
  * @description:
  * @author: Maxwell
  * @email: maodihui@foxmail.com
- * @date: 2022/3/22 10:01
+ * @date: 2022/3/27 22:44
  */
-public class Test {
-
+public class GenericType {
 
 
 }

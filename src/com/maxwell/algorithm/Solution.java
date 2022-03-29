@@ -2,6 +2,8 @@ package com.maxwell.algorithm;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
 
@@ -63,20 +65,63 @@ class Solution1 {
     }
 }
 
-class Solution2{
+class Solution2 {
 
     public static void main(String[] args) {
         printOut(73734566);
     }
 
-    public static void printOut(int n){
-        if (n>=10)
-            printOut(n/10);
-        printDigit(n%10);
+    public static void printOut(int n) {
+        if (n >= 10) printOut(n / 10);
+        printDigit(n % 10);
     }
 
     private static void printDigit(int i) {
         System.out.print(i);
     }
+}
+
+class Solution3 {
+
+    public int[] twoSum(int[] nums, int target) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) return new int[]{map.get(target - nums[i]), i};
+            map.put(nums[i], i);
+
+        }
+        return new int[0];
+    }
+}
+
+class Solution4 {
+    public static void main(String[] args) {
+        hasAlternatingBits(6);
+    }
+
+    public static boolean hasAlternatingBits(int n) {
+
+        Integer[] temp = new Integer[2];
+        boolean flag = true;
+        int q = n;
+        while (q != 0) {
+            if (flag) {
+                if (q % 2 != 0) temp[0] = 1;
+                else temp[0] = 0;
+                flag = false;
+            }
+            if (q % 2 != 0) temp[1] = 1;
+            else temp[1] = 0;
+            q = q / 2;
+            if (temp[0].intValue() == temp[1].intValue()) {
+                return false;
+            }
+            temp[0] = temp[1];
+            temp[1] = null;
+        }
+        return true;
+    }
+
 
 }

@@ -7,9 +7,15 @@
         <sale>15.54</sale>
     </book>
     <book>
+        <name>fwqfas</name>
+        <author>sda</author>
+        <sale>4564</sale>
         <name>Maxwell自传</name>
         <author>毛狄辉</author>
         <sale>1000</sale>
+        <name>hagA</name>
+        <author>sda</author>
+        <sale>4564</sale>
     </book>
 
 </books>
