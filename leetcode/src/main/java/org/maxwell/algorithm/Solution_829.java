@@ -1,12 +1,14 @@
 package org.maxwell.algorithm;
 
+import org.junit.Test;
+
 /**
  * @description: 连续整数求和
  * @author: Maxwell
  * @email: maodihui@foxmail.com
  * @date: 2022/4/20 0:40
  */
-public class Solution829 {
+public class Solution_829 {
 
     public static void main(String[] args) {
 
@@ -35,6 +37,27 @@ public class Solution829 {
             }
         }
         return ans + 1;
+
+    }
+
+
+    @Test
+    public void test(){
+        dl_consecutiveNumbersSum(313653678);
+    }
+
+    /**
+     *  大佬 等差数列思想
+     * @param N
+     * @return
+     */
+    public int dl_consecutiveNumbersSum(int N) {
+
+        int res = 1;
+        for (int i = 2; i < Math.sqrt(2 * N); ++i) {
+            if ((N - i * (i - 1) / 2) % i == 0) ++res;
+        }
+        return res;
 
     }
 

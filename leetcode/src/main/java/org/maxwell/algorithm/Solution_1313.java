@@ -9,7 +9,7 @@ import java.util.List;
  * @email: maodihui@foxmail.com
  * @date: 2022/4/19 1:05
  */
-public class Solution1313 {
+public class Solution_1313 {
 
 
 

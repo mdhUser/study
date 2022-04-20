@@ -9,7 +9,7 @@ import java.util.function.Function;
  * @email: maodihui@foxmail.com
  * @date: 2022/4/17 17:49
  */
-public class Solution819 {
+public class Solution_819 {
 
 
     public static void main(String[] args) {
