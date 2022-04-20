@@ -1,4 +1,4 @@
-package org.maxwell.algorithm;
+package org.maxwell.algorithm.offer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,6 +75,11 @@ public class SolutionOffer57_2 {
     }
 
 
+    /**
+     *  滑动窗口思想
+     * @param target
+     * @return
+     */
     public static int[][] daolao_findContinuousSequence(int target) {
         int left = 1, right = 1;
         List<int[]> res = new ArrayList<>();

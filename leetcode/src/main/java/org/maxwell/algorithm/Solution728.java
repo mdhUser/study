@@ -48,6 +48,12 @@ public class Solution728 {
         return list;
     }
 
+    /**
+     *  题解
+     * @param left
+     * @param right
+     * @return
+     */
     public static List<Integer> selfDividingNumbers_tj(int left, int right) {
         List<Integer> ans = new ArrayList<>();
         out:

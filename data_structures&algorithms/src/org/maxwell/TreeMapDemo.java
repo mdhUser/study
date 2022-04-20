@@ -1,4 +1,4 @@
-package org.maxwell.algorithm;
+package org.maxwell;
 
 import java.util.Comparator;
 import java.util.TreeMap;
