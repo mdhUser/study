@@ -11,6 +11,7 @@ public class Log {
 
     public static void main(String[] args) {
 
+
     }
 
     public static boolean pow(int n) {
