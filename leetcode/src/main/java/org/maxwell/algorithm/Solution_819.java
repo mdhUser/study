@@ -19,6 +19,11 @@ public class Solution_819 {
     }
 
 
+    /**
+     * 是否是2的倍数
+     * @param n
+     * @return
+     */
     public static boolean isPowerOfTwo(int n) {
 
         if (n == 1) return true;
@@ -36,7 +41,12 @@ public class Solution_819 {
         return false;
     }
 
-
+    /**
+     *  我的杰作
+     * @param paragraph
+     * @param banned
+     * @return
+     */
     public static String mostCommonWord(String paragraph, String[] banned) {
 
         String str = paragraph.toLowerCase();

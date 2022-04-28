@@ -11,7 +11,11 @@ import java.util.Arrays;
 public class Solution_905 {
 
 
-
+    /**
+     *  lambda
+     * @param nums
+     * @return
+     */
     public int[] sortArrayByParity(int[] nums) {
         return Arrays.stream(nums)
                 .boxed()
