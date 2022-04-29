@@ -1,4 +1,4 @@
-package org.maxwell.algorithm;
+package org.maxwell.algorithm.easy;
 
 import java.util.*;
 import java.util.function.Function;

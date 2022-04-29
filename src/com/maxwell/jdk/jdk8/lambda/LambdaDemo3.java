@@ -17,8 +17,8 @@ public class LambdaDemo3 {
         List<String> list = Arrays.asList("springboot教程", "微服务教程", "并发编程",
                 "redis教程", "消息队列教程");
 
-        List<String> result = list.stream().map(obj -> "在小滴课堂学习" + obj).collect(Collectors.toList());
-        result.forEach(l -> System.out.println(l));
+        List<String> result = list.stream().map(obj -> "在小滴课堂学习" + obj).toList();
+        result.forEach(System.out::println);
 
         System.out.println("============================");
 
@@ -32,7 +32,7 @@ public class LambdaDemo3 {
         List<UserDTO> userDTOS = users.
                 stream()
                 .map(u ->
-                        new UserDTO(u.getId(), u.getName())).collect(Collectors.toList());
+                        new UserDTO(u.getId(), u.getName())).toList();
 
         System.out.println("userDTOS = " + userDTOS);
 
