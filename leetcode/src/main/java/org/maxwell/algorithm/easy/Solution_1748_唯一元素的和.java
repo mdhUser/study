@@ -21,8 +21,8 @@ public class Solution_1748_唯一元素的和 {
         }
 
         int[] cot = new int[max+1];
-        for (int i = 0; i < nums.length; i++) {
-            cot[nums[i]]++;
+        for (int num : nums) {
+            cot[num]++;
         }
 
         int sum=0;

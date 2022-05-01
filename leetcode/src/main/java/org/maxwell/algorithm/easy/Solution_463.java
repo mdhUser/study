@@ -1,4 +1,4 @@
-package org.maxwell.algorithm;
+package org.maxwell.algorithm.easy;
 
 /**
  * @description: 463. 岛屿的周长

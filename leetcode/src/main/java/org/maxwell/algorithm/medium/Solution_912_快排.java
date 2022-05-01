@@ -1,4 +1,4 @@
-package org.maxwell.algorithm;
+package org.maxwell.algorithm.medium;
 
 import java.util.Random;
 
@@ -8,7 +8,7 @@ import java.util.Random;
  * @email: maodihui@foxmail.com
  * @date: 2022/4/21 22:37
  */
-public class Solution_912 {
+public class Solution_912_快排 {
 
 
     /**

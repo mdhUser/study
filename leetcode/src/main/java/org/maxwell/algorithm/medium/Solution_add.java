@@ -1,4 +1,4 @@
-package org.maxwell.algorithm;
+package org.maxwell.algorithm.medium;
 
 /**
  * @description: 不用+号的+法

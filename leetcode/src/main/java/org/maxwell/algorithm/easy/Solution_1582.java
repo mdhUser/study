@@ -1,4 +1,4 @@
-package org.maxwell.algorithm;
+package org.maxwell.algorithm.easy;
 
 /**
  * @description: 二进制矩阵中的特殊位置
