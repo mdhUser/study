@@ -1,4 +1,4 @@
-package org.maxwell.algorithm.easy;
+package org.maxwell.algorithm.组合数;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,8 +1,6 @@
-package org.maxwell.algorithm.easy;
+package org.maxwell.algorithm.计数;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @description:
@@ -74,15 +72,65 @@ public class Solution_387_字符串中的第一个唯一字符 {
         return first;
     }
 
+
+    /**
+     * 队列解法
+     *
+     * @param s
+     * @return
+     */
+    public int firstUniqChar_queue(String s) {
+        Map<Character, Integer> position = new HashMap<>();
+        Queue<Pair> queue = new LinkedList<>();
+        int n = s.length();
+        for (int i = 0; i < n; ++i) {
+            char ch = s.charAt(i);
+            if (!position.containsKey(ch)) {
+                position.put(ch, i);
+                queue.offer(new Pair(ch, i));
+            } else {
+                position.put(ch, -1);
+                while (!queue.isEmpty() && position.get(queue.peek().ch) == -1) {
+                    queue.poll();
+                }
+            }
+        }
+        return queue.isEmpty() ? -1 : queue.poll().pos;
+    }
+
+
+    /**
+     * 最快
+     *
+     * @param s
+     * @return
+     */
+    public static int firstUniqChar_fast(String s) {
+
+        int len = s.length();
+        int[] array = new int[26];
+        for (int i = 0; i < len; ++i) {
+            array[s.charAt(i) - 'a']++;
+        }
+
+        for (int i = 0; i < array.length; ++i) {
+            if (array[i] == 1) {
+                return s.indexOf((char) (i + 'a'));
+            }
+        }
+
+        return -1;
+
+    }
+
 }
 
-class Pair{
+class Pair {
+    char ch;
+    int pos;
 
-    char c;
-    int index;
-
-    public Pair(char c, int index) {
-        this.c = c;
-        this.index = index;
+    Pair(char ch, int pos) {
+        this.ch = ch;
+        this.pos = pos;
     }
 }

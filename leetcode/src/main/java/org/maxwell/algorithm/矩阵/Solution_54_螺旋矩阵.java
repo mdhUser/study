@@ -1,4 +1,4 @@
-package org.maxwell.algorithm.medium;
+package org.maxwell.algorithm.矩阵;
 
 import java.util.ArrayList;
 import java.util.List;
