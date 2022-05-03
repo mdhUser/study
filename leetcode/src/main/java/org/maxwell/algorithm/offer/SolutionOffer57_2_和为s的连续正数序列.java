@@ -11,7 +11,7 @@ import java.util.List;
  * @email: maodihui@foxmail.com
  * @date: 2022/4/19 9:43
  */
-public class SolutionOffer57_2 {
+public class SolutionOffer57_2_和为s的连续正数序列 {
 
     public static void main(String[] args) {
         int[][] continuousSequence = findContinuousSequence(15);

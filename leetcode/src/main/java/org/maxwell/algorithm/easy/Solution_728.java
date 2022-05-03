@@ -61,7 +61,7 @@ public class Solution_728 {
             int cur = i;
             while (cur > 0) {
                 int t = cur % 10;
-                if (i % t != 0 || t == 0)
+                if (i % t != 0)
                     continue out;
                 cur/=10;
             }
