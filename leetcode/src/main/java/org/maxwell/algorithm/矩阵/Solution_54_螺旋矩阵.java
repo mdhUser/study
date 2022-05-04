@@ -11,8 +11,13 @@ import java.util.List;
  */
 public class Solution_54_螺旋矩阵 {
 
+    /**
+     *  层级解刨
+     * @param matrix
+     * @return
+     */
     public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> order = new ArrayList<Integer>();
+        List<Integer> order = new ArrayList<>();
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return order;
         }

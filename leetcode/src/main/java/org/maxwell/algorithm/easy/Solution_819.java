@@ -75,7 +75,6 @@ public class Solution_819 {
 
         List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
         Collections.sort(list, comparator);
-
         return list.get(0).getKey();
 
     }
