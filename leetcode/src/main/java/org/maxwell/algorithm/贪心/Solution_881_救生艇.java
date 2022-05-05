@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @email: maodihui@foxmail.com
  * @date: 2022/4/20 17:36
  */
-public class Solution_881 {
+public class Solution_881_救生艇{
 
 
     /**

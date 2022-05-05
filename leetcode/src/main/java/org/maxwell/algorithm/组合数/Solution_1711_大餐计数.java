@@ -51,7 +51,9 @@ public class Solution_1711_大餐计数 {
         int pairs = 0;
         Map<Integer, Integer> map = new HashMap<>();
         for (int val : deliciousness) {
+            //sum为2的幂
             for (int sum = 1; sum <= maxSum; sum <<= 1) {
+                //sum-val找出另一加数
                 int count = map.getOrDefault(sum - val, 0);
                 pairs = (pairs + count) % MOD;
             }

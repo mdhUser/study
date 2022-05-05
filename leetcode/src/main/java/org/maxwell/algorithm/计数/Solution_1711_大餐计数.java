@@ -16,6 +16,11 @@ public class Solution_1711_大餐计数 {
                 23, 105, 7996, 196, 0, 2, 55, 457, 5, 3, 924, 7268, 16, 48, 4, 0, 12, 116, 2628, 1468}));
     }
 
+    /**
+     *
+     * @param deliciousness
+     * @return
+     */
     public static int countPairs(int[] deliciousness) {
         int n = deliciousness.length, count = 0;
         for (int i = 0; i < n; i++) {
@@ -31,6 +36,11 @@ public class Solution_1711_大餐计数 {
     }
 
 
+    /**
+     *
+     * @param deliciousness
+     * @return
+     */
     public int countPairs_useHash(int[] deliciousness) {
         final int MOD = 1000000007;
         int maxVal = 0;
