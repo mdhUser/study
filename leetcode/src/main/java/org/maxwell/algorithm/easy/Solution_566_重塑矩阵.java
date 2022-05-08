@@ -6,15 +6,13 @@ package org.maxwell.algorithm.easy;
  * @email: maodihui@foxmail.com
  * @date: 2022/4/23 19:45
  */
-public class Solution_566 {
+public class Solution_566_重塑矩阵 {
 
     public int[][] matrixReshape(int[][] mat, int r, int c) {
-
         int n = mat.length;
         int m = mat[0].length;
         int[][] ret;
         int i, j, index;
-
         if (n * m != r * c)
             return mat;
 
@@ -29,8 +27,6 @@ public class Solution_566 {
 
         }
         return ret;
-
-
     }
 
 }
