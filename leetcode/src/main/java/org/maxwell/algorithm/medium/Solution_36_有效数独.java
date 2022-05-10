@@ -1,4 +1,4 @@
-package org.maxwell.algorithm.easy;
+package org.maxwell.algorithm.medium;
 
 /**
  * @description:

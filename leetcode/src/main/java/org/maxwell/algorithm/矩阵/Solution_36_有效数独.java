@@ -16,7 +16,6 @@ public class Solution_36_有效数独 {
      * @return
      */
     public boolean isValidSudoku(char[][] board) {
-
         int[][] rows = new int[9][9];
         int[][] columns = new int[9][9];
         int[][][] subboxes = new int[3][3][9];

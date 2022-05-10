@@ -43,37 +43,6 @@ public class Solution_387_字符串中的第一个唯一字符 {
     }
 
     /**
-     * 方法二：使用哈希表存储索引
-     *
-     * @param s
-     * @return
-     */
-    public int firstUniqChar_useIndex(String s) {
-        Map<Character, Integer> position = new HashMap<Character, Integer>();
-        int n = s.length();
-        for (int i = 0; i < n; ++i) {
-            char ch = s.charAt(i);
-            if (position.containsKey(ch)) {
-                position.put(ch, -1);
-            } else {
-                position.put(ch, i);
-            }
-        }
-        int first = n;
-        for (Map.Entry<Character, Integer> entry : position.entrySet()) {
-            int pos = entry.getValue();
-            if (pos != -1 && pos < first) {
-                first = pos;
-            }
-        }
-        if (first == n) {
-            first = -1;
-        }
-        return first;
-    }
-
-
-    /**
      * 队列解法
      *
      * @param s
@@ -105,22 +74,19 @@ public class Solution_387_字符串中的第一个唯一字符 {
      * @param s
      * @return
      */
-    public static int firstUniqChar_fast(String s) {
-
+    public int firstUniqChar_fast(String s) {
         int len = s.length();
         int[] array = new int[26];
         for (int i = 0; i < len; ++i) {
             array[s.charAt(i) - 'a']++;
         }
 
-        for (int i = 0; i < array.length; ++i) {
-            if (array[i] == 1) {
-                return s.indexOf((char) (i + 'a'));
+        for (int i = 0; i < len; ++i) {
+            if (array[s.charAt(i) - 'a'] == 1) {
+                return i;
             }
         }
-
         return -1;
-
     }
 
 }
