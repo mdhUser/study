@@ -1,5 +1,7 @@
 package org.maxwell.algorithm.链表;
 
+import org.maxwell.algorithm.ListNode;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,14 +52,4 @@ public class Solution_141_环形链表 {
     }
 
 
-}
-
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
 }

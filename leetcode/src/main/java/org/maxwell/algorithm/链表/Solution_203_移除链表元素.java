@@ -1,4 +1,5 @@
-package org.maxwell.algorithm.easy;
+package org.maxwell.algorithm.链表;
+
 import org.maxwell.algorithm.ListNode;
 
 /**
@@ -49,3 +50,4 @@ public class Solution_203_移除链表元素 {
 
 
 }
+

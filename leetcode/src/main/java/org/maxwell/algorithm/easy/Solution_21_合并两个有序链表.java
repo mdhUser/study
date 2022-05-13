@@ -57,8 +57,6 @@ public class Solution_21_合并两个有序链表 {
         return prehead.next;
     }
 
-
-
     static class ListNode {
         int val;
         ListNode next;
