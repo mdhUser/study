@@ -40,7 +40,6 @@ public class Solution_141_环形链表 {
             return false;
         ListNode slow = head;
         ListNode fast = head.next;
-
         while (fast != slow) {
             if (fast == null || fast.next == null)
                 return false;
