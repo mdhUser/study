@@ -1,12 +1,12 @@
 package org.maxwell.algorithm.easy;
 
 /**
- * @description: 463. 岛屿的周长
+ * @description: 463.
  * @author: Maxwell
  * @email: maodihui@foxmail.com
  * @date: 2022/4/23 12:30
  */
-public class Solution_463 {
+public class Solution_463_岛屿的周长 {
 
     // todo 理解完这个两个数组就通透了
     // x轴方向相邻坐标
