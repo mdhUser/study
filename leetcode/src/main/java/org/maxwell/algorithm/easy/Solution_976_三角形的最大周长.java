@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @email: maodihui@foxmail.com
  * @date: 2022/4/21 16:14
  */
-public class Solution_976 {
+public class Solution_976_三角形的最大周长 {
 
 
     public static void main(String[] args) {

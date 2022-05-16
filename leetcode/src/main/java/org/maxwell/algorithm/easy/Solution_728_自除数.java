@@ -9,7 +9,7 @@ import java.util.List;
  * @email: maodihui@foxmail.com
  * @date: 2022/3/31 21:51
  */
-public class Solution_728 {
+public class Solution_728_自除数 {
 
     public static void main(String[] args) {
         System.out.println(selfDividingNumbers(1, 22));
