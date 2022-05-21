@@ -12,6 +12,11 @@ import java.util.Random;
 public class Solution_462_最少移动次数使数组元素相等II {
 
 
+    /***
+     *  普通方法
+     * @param nums
+     * @return
+     */
     public int minMoves2(int[] nums) {
 
         int len = nums.length;
