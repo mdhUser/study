@@ -25,7 +25,6 @@ public class Foodie implements Runnable {
                 String remove = Desk.DISH.remove(0);
                 System.out.println("已吃" + remove + "还剩" + Desk.DISH.size());
 
-//                Desk.DISH.notify();
             }
 
             try {

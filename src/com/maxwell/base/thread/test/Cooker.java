@@ -29,7 +29,6 @@ public class Cooker implements Runnable {
                 String hamburger ="汉堡:"+num;
                 Desk.DISH.add(hamburger);
                 System.out.println("已做汉堡"+Desk.DISH.size());
-
                 Desk.DISH.notify();
             }
             try {
