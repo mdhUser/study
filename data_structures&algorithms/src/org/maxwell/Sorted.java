@@ -1,7 +1,5 @@
 package org.maxwell;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 
 /**
@@ -12,7 +10,6 @@ import java.util.Arrays;
  */
 public class Sorted {
 
-    @Test
     public void bub() {
         int[] nums = {3221, 1, 10, 9680, 577, 9420, 7, 5622, 4793, 2030, 3138, 82, 2599, 743, 4127};
 
@@ -29,7 +26,7 @@ public class Sorted {
         System.out.println(Arrays.toString(nums));
     }
 
-    @Test
+
     public void select() {
 
         int[] nums = {3221, 1, 10, 9680, 577, 9420, 7, 5622, 4793, 2030, 3138, 82, 2599, 743, 4127};

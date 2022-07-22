@@ -4,7 +4,6 @@ import com.maxwell.proxy.dynamicproxy.DynamicProxy;
 import com.maxwell.proxy.impl.Lz;
 import com.maxwell.proxy.impl.Zxzz;
 import com.maxwell.proxy.inter.Singer;
-import org.junit.Test;
 
 /**
  * @description:
@@ -31,7 +30,6 @@ public class MainDemo {
     }
 
 
-    @Test
     public void test(){
 
         Singer[] arrys = new Lz[5];

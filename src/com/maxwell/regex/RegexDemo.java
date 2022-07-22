@@ -1,6 +1,5 @@
 package com.maxwell.regex;
 
-import org.junit.Test;
 
 /**
  * @description:
@@ -11,7 +10,7 @@ import org.junit.Test;
 
 public class RegexDemo {
 
-    @Test
+
     public void test(){
 
         String regex="1[34859]\\d{9}";

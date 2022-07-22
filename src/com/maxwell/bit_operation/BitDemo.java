@@ -1,7 +1,5 @@
 package com.maxwell.bit_operation;
 
-import org.junit.Test;
-
 /**
  * @description:
  * @author: Maxwell
@@ -10,7 +8,7 @@ import org.junit.Test;
  */
 public class BitDemo {
 
-    @Test
+
     public void test() {
         int i = 3 & 5;
         int i1 = Integer.valueOf("0101", 2);
