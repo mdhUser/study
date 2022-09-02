@@ -1,4 +1,4 @@
-package org.maxwell;
+package src.org.maxwell.data;
 
 /**
  * @description:  模运算
