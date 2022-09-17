@@ -34,14 +34,10 @@ public class NodeType<T> {
     }
 
     public List<T> values() {
-
         List<T> values = new ArrayList<>();
         if (null != leftNode) values.addAll(leftNode.values());
-
         values.add(value);
-
         if (null != rightNode) values.addAll(rightNode.values());
-
         return values;
     }
 
