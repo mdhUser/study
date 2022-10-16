@@ -17,8 +17,24 @@ public class ListWrong {
 
     public static void main(String[] args) {
 
-        asListAdd();
+        casterror();
 
+
+    }
+
+    /**
+     * 强转异常 不可强转
+     *
+     */
+    private static void casterror() {
+        List<String> names = new ArrayList<String>() {{
+            add("one");
+            add("two");
+            add("three");
+
+        }};
+        ArrayList strings = (ArrayList) names.subList(0, 1);
+        System.out.println(strings.toString());
     }
 
 
