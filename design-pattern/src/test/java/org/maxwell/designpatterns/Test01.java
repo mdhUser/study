@@ -1,6 +1,7 @@
 package org.maxwell.designpatterns;
 
 import org.junit.Test;
+import org.maxwell.designpatterns.singleton.IdGeneratorEnum;
 
 /**
  * @description:
@@ -13,8 +14,7 @@ public class Test01 {
     @Test
     public void testFactory(){
 
-
-
+        IdGeneratorEnum.INSTANCE.getId();
 
     }
 

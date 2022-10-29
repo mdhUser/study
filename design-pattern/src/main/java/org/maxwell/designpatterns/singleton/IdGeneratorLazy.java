@@ -11,20 +11,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class IdGeneratorLazy {
 
 
-    private static final AtomicInteger id = new AtomicInteger(0);
+    private final AtomicInteger id = new AtomicInteger(0);
+
+    private static IdGeneratorLazy instance;
 
     private IdGeneratorLazy() {
     }
 
-    private static final class InstanceHolder {
-        private static final IdGeneratorLazy instance = new IdGeneratorLazy();
+    //双端检查
+    private static IdGeneratorLazy getInstance() {
+        if (instance == null) {
+            synchronized (IdGeneratorLazy.class) {
+                if (instance == null) {
+                    instance = new IdGeneratorLazy();
+                }
+            }
+        }
+        return instance;
     }
 
-    public static IdGeneratorLazy getInstance() {
-        return InstanceHolder.instance;
-    }
 
-    public static Integer getId() {
+    public Integer getId() {
         return id.incrementAndGet();
     }
 

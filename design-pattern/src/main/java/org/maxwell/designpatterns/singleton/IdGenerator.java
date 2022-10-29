@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class IdGenerator {
 
-    private static final AtomicInteger id = new AtomicInteger(0);
+    private final AtomicInteger id = new AtomicInteger(0);
 
     private static final IdGenerator instance = new IdGenerator();
 
@@ -21,7 +21,7 @@ public class IdGenerator {
         return instance;
     }
 
-    public static Integer getId() {
+    public Integer getId() {
         return id.incrementAndGet();
     }
 

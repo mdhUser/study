@@ -10,11 +10,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class IdGeneratorStatic {
 
-
-    private static final AtomicInteger id = new AtomicInteger(0);
+    private final AtomicInteger id = new AtomicInteger(0);
 
     //使用静态内部类生产单例
-    public static class IdGeneratorHolder {
+    private static class IdGeneratorHolder {
         private static final IdGeneratorStatic instance = new IdGeneratorStatic();
     }
 
@@ -22,7 +21,7 @@ public class IdGeneratorStatic {
         return IdGeneratorHolder.instance;
     }
 
-    public static Integer getId() {
+    public Integer getId() {
         return id.incrementAndGet();
     }
 
