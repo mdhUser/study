@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Maxwell
- * @description: 简易DI容器
+ * @description: 简易DI容器 （IOC）
  * @email: maodihui@foxmail.com
  * @date: 2022/10/31 16:20
  */
@@ -68,8 +68,7 @@ public class BeansFactory {
                  | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException("", e);
         }
-
-        if (bean != null && beanDefinition.isSingleton()) {
+        if (beanDefinition.isSingleton()) {
             singletonObjects.putIfAbsent(beanDefinition.getId(), bean);
             return singletonObjects.get(beanDefinition.getId());
         }
