@@ -1,4 +1,4 @@
-package org.maxwell.designpatterns;
+package org.maxwell.designpatterns.prototype;
 
 import java.io.*;
 
