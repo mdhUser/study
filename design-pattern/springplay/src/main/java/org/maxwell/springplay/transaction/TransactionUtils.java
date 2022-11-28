@@ -11,7 +11,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  */
 public class TransactionUtils {
 
-    public static class DoTransactionCompletion implements TransactionSynchronization {
+     static class DoTransactionCompletion implements TransactionSynchronization {
         private final Runnable runnable;
 
         public DoTransactionCompletion(Runnable runnable) {
@@ -27,9 +27,9 @@ public class TransactionUtils {
     }
 
     //事务成功后执行的回调函数
-    public static void doAfterTransaction(DoTransactionCompletion doTransactionCompletion) {
+    public static void doAfterTransaction(Runnable run) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
-            TransactionSynchronizationManager.registerSynchronization(doTransactionCompletion);
+            TransactionSynchronizationManager.registerSynchronization(new DoTransactionCompletion(run));
         }
     }
 

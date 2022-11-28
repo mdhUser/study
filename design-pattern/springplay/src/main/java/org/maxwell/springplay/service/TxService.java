@@ -13,10 +13,9 @@ public class TxService {
 
     @Transactional
     public void saveMessage() {
-        TransactionUtils.doAfterTransaction(
-                new TransactionUtils.DoTransactionCompletion(() -> {
+        TransactionUtils.doAfterTransaction(() -> {
                     System.out.println("do after transaction ...");
-                }));
+                });
 
     }
 }
