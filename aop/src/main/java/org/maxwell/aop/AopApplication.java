@@ -23,7 +23,6 @@ public class AopApplication implements CommandLineRunner {
 
         orderService.saveOrder(new SaveOrder(2L));
 
-
         orderService.updateOrder(new UpdateOrder(1L));
 
     }

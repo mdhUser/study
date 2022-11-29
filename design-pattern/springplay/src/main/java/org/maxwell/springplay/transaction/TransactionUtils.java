@@ -11,7 +11,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  */
 public class TransactionUtils {
 
-     static class DoTransactionCompletion implements TransactionSynchronization {
+    static class DoTransactionCompletion implements TransactionSynchronization {
         private final Runnable runnable;
 
         public DoTransactionCompletion(Runnable runnable) {

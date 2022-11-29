@@ -1,4 +1,4 @@
-package org.maxwell.springplay;
+package org.maxwell.springplay.web;
 
 import org.maxwell.springplay.event.publisher.CustomSpringEventPublisher;
 import org.maxwell.springplay.event.publisher.GenericSpringEventPublisher;

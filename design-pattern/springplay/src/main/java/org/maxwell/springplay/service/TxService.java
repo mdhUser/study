@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @date: 2022/11/27 21:11
  */
 public class TxService {
-
     @Transactional
     public void saveMessage() {
         TransactionUtils.doAfterTransaction(() -> {

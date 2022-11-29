@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @author Maxwell
@@ -15,11 +15,14 @@ import java.util.concurrent.Executors;
  */
 @Configuration
 public class AsynchronousSpringEventConfig {
+    private final ThreadPoolExecutor executor = new ThreadPoolExecutor(
+            1, 1, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<>(100)
+    );
 
     @Bean(name = "applicationEventMulticaster")
     public ApplicationEventMulticaster simpleApplicationEventMulticaster() {
         SimpleApplicationEventMulticaster eventMulticaster = new SimpleApplicationEventMulticaster();
-        eventMulticaster.setTaskExecutor(Executors.newFixedThreadPool(4));
+        eventMulticaster.setTaskExecutor(executor);
         return eventMulticaster;
     }
 

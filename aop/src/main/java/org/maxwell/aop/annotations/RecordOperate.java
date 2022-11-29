@@ -17,6 +17,6 @@ public @interface RecordOperate {
 
     String desc() default "";
 
-    Class<? extends Convert> convert();
+    Class<? extends Convert<?>> convert();
 
 }

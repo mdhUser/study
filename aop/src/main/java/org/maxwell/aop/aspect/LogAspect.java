@@ -40,8 +40,8 @@ public class LogAspect {
         threadPoolExecutor.execute(() -> {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();
             Method method = signature.getMethod();
-            OperateLogDO operateLogDO;
             RecordOperate recordOperate = method.getAnnotation(RecordOperate.class);
+            OperateLogDO operateLogDO;
             try {
                 Convert convert = recordOperate.convert().getConstructor().newInstance();
                 operateLogDO = convert.convert(joinPoint.getArgs()[0]);
