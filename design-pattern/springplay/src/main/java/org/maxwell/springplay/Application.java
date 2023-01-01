@@ -23,7 +23,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         //System.out.println(userService.out("FU"));
-        sendMsgObserver.notify("bizType1", "业务1的内容");
-        sendMsgObserver.notify("bizType2", "业务2的内容");
+        //sendMsgObserver.notify("bizType1", "业务1的内容");
+        //sendMsgObserver.notify("bizType2", "业务2的内容");
     }
 }

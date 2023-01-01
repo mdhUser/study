@@ -17,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 public class ObserverRegistry {
 
-    private ConcurrentMap<Class<?>, CopyOnWriteArraySet<ObserverAction>> registry = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Class<?>, CopyOnWriteArraySet<ObserverAction>> registry = new ConcurrentHashMap<>();
 
 
     public void register(Object observer) {
@@ -33,13 +33,13 @@ public class ObserverRegistry {
     }
 
 
-    public List<ObserverAction> getMatchedObserverActions(Object event){
+    public List<ObserverAction> getMatchedObserverActions(Object event) {
         List<ObserverAction> matchObservers = new ArrayList<>();
         Class<?> postedEventType = event.getClass();
         for (Map.Entry<Class<?>, CopyOnWriteArraySet<ObserverAction>> entry : registry.entrySet()) {
             Class<?> eventType = entry.getKey();
             Collection<ObserverAction> eventActions = entry.getValue();
-            if (postedEventType.isAssignableFrom(eventType)){
+            if (postedEventType.isAssignableFrom(eventType)) {
                 matchObservers.addAll(eventActions);
             }
         }
