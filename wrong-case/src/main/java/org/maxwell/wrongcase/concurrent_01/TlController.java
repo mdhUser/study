@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.concurrent;
+package org.maxwell.wrongcase.concurrent_01;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
