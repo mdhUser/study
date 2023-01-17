@@ -6,10 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
@@ -34,6 +31,15 @@ public class ThreadPoolController {
             log.info("Number of Tasks in Queue: {}", threadPool.getQueue().size());
             log.info("=========================");
         }, 0, 1, TimeUnit.SECONDS);
+    }
+
+
+
+    public int wrong() throws ExecutionException, InterruptedException {
+        return ThreadPoolConfig.getAsyncThreadPool().submit(() -> {
+            TimeUnit.MILLISECONDS.sleep(10);
+            return 1;
+        }).get();
     }
 
     @GetMapping("/right")

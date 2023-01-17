@@ -151,14 +151,14 @@ public class concurrentDemo {
 
         //校验元素数量
         Assert.isTrue(normalUse.size() == ITEM_COUNT_1, "normalUse size error");
-        Assert.isTrue(normalUse.entrySet().stream().mapToLong(item -> item.getValue()).reduce(0, Long::sum)
+        Assert.isTrue(normalUse.values().stream().mapToLong(aLong -> aLong).reduce(0, Long::sum)
                 == LOOP_COUNT, "normalUse count error");
 
         stopWatch.start("goodUse");
         Map<String, Long> goodUse = goodUse();
         stopWatch.stop();
         Assert.isTrue(goodUse.size() == ITEM_COUNT_1, "goodUse size error");
-        Assert.isTrue(goodUse.entrySet().stream().mapToLong(item -> item.getValue()).reduce(0, Long::sum) == LOOP_COUNT, "gooduse count error");
+        Assert.isTrue(goodUse.values().stream().mapToLong(l -> l).reduce(0, Long::sum) == LOOP_COUNT, "gooduse count error");
         log.info(stopWatch.prettyPrint());
         return "OK";
     }
