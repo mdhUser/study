@@ -2,7 +2,7 @@
 /out/
 /.idea
 /**/*.jp*
-/*/target
+/**/target
 /*/*.iml
 *.iml
 *.class

@@ -1,2 +1,22 @@
 server:
   port: 8081
+
+
+#设置feign连接超时和读取超时
+feign:
+  client:
+    config:
+      default:
+        read-timeout: 3000
+        connect-timeout: 3000
+      #配置单独client的 超时配置
+      cl:
+        read-timeout: 2000
+        connect-timeout: 2000
+sms:
+  ribbon:
+    listOfServers: localhost:45679,localhost:45678
+
+ribbon:
+  MaxAutoRetriesNextServer: 0
+

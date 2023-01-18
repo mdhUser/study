@@ -47,7 +47,7 @@ public class HttpClientDemoController {
                 .setConnectionManager(new PoolingHttpClientConnectionManager())
                 .evictIdleConnections(TimeValue.of(60, TimeUnit.SECONDS))
                 .build();
-        try (CloseableHttpResponse response = client.execute(new HttpGet("http://127.0.0.1:45678/httpclientnotreuse/test"))) {
+        try (CloseableHttpResponse response = client.execute(new HttpGet("http://127.0.0.1:8080/testEvent1"))) {
             return EntityUtils.toString(response.getEntity());
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,10 +57,24 @@ public class HttpClientDemoController {
 
     @GetMapping("/testHttp/right")
     public String right() {
-        try (CloseableHttpResponse response = httpClient.execute(new HttpGet("http://127.0.0.1:45678/httpclientnotreuse/test"))) {
+        try (CloseableHttpResponse response = httpClient.execute(new HttpGet("http://127.0.0.1:8080/testEvent1"))) {
             return EntityUtils.toString(response.getEntity());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    @GetMapping("/testHttp/wrong2")
+    public String wrong2() {
+        try (CloseableHttpClient client = HttpClients.custom()
+                .setConnectionManager(new PoolingHttpClientConnectionManager())
+                .evictIdleConnections(TimeValue.of(60, TimeUnit.SECONDS)).build();
+             CloseableHttpResponse response = client.execute(new HttpGet("http://127.0.0.1:8080/testEvent1"))) {
+            return EntityUtils.toString(response.getEntity());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return null;
     }

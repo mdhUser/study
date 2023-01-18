@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -47,7 +48,7 @@ public class CopyOnWriteListDemo {
     }
 
     private void addAll(List<Integer> list) {
-        list.addAll(IntStream.rangeClosed(1, 1000000).boxed().toList());
+        list.addAll(IntStream.rangeClosed(1, 1000000).boxed().collect(Collectors.toList()));
     }
 
 
