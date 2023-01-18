@@ -2,6 +2,7 @@ package org.maxwell.wrongcase.concurrent_03;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.maxwell.wrongcase.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +23,6 @@ import java.util.stream.IntStream;
 public class ThreadPoolController {
 
 
-    private void printStats(ThreadPoolExecutor threadPool) {
-        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> {
-            log.info("=========================");
-            log.info("Pool Size: {}", threadPool.getPoolSize());
-            log.info("Active Threads: {}", threadPool.getActiveCount());
-            log.info("Number of Tasks Completed: {}", threadPool.getCompletedTaskCount());
-            log.info("Number of Tasks in Queue: {}", threadPool.getQueue().size());
-            log.info("=========================");
-        }, 0, 1, TimeUnit.SECONDS);
-    }
 
 
 
@@ -55,7 +46,7 @@ public class ThreadPoolController {
         //threadPool.prestartAllCoreThreads();
         //threadPool.allowCoreThreadTimeOut(true);
 
-        printStats(threadPool);
+        Utils.printStats(threadPool);
 
         IntStream.rangeClosed(1, 20).forEach(__ -> {
             try {

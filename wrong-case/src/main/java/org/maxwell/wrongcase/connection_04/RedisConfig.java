@@ -21,7 +21,6 @@ import javax.annotation.PostConstruct;
 public class RedisConfig {
 
 
-
     private static final String HOST = "59.36.170.213";
     private static final int PORT = 6379;
     private static Jedis jedis = new Jedis(HOST, PORT);
@@ -34,7 +33,9 @@ public class RedisConfig {
         jedisPoolConfig.setMaxIdle(6);
         jedisPoolConfig.setMinIdle(2);
         jedisPoolConfig.setMaxTotal(10);
-        JedisPool jedisPool = new JedisPool(jedisPoolConfig, HOST, PORT, 10000, AUTH);
+        //设置请求超时时间
+        jedisPoolConfig.setMaxWaitMillis(10000);
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig, HOST, PORT, 5000, AUTH);
         log.info("JedisPool连接成功：{} \t port:{}", HOST, PORT);
         return jedisPool;
     }

@@ -58,6 +58,13 @@ public class HttpClientDemoController {
     }
 
 
+    /**
+     * 模拟网络爬虫接口
+     *
+     * @param count
+     * @return
+     * @throws InterruptedException
+     */
     @GetMapping("/fetch")
     public int wrong(@RequestParam(value = "count", defaultValue = "10") int count) throws InterruptedException {
         return sendRequest(count, () -> httpClient);

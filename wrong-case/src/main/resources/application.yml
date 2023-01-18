@@ -22,3 +22,27 @@ sms:
 ribbon:
   MaxAutoRetriesNextServer: 0
 
+logging:
+  level:
+    org:
+      springframework:
+        jpa: debug
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://59.36.170.213:3306/mydb?connectTimeout=5000&characterEncoding=UTF-8&useSSL=false
+    platform: mysql
+    hikari:
+      password: Maxwell0326
+      username: root
+      maximum-pool-size: 100
+      #请求连接超时
+      connection-timeout: 10000
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+
