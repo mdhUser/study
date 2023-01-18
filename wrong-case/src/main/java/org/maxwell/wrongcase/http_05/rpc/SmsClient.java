@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @email: maodihui@foxmail.com
  * @date: 2023/1/17 16:49
  */
-@FeignClient(name = "sms", url = "http://127.0.0.1:8080")
+@FeignClient(name = "sms")
 public interface SmsClient {
 
     @GetMapping("/ribbonretryissueserver/sms")

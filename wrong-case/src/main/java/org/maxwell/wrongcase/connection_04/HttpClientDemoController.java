@@ -1,13 +1,12 @@
 package org.maxwell.wrongcase.connection_04;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.hc.client5.http.classic.methods.HttpGet;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
-import org.apache.hc.core5.util.TimeValue;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.util.EntityUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @date: 2023/1/16 11:00
  */
 @Slf4j
-@RestController
+@RestController("http1")
 public class HttpClientDemoController {
 
 
@@ -30,7 +29,7 @@ public class HttpClientDemoController {
     static {
         httpClient = HttpClients.custom()
                 .setConnectionManager(new PoolingHttpClientConnectionManager())
-                .evictIdleConnections(TimeValue.of(60, TimeUnit.SECONDS))
+                .evictIdleConnections(60, TimeUnit.SECONDS)
                 .build();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
@@ -45,7 +44,7 @@ public class HttpClientDemoController {
     public String wrong() {
         CloseableHttpClient client = HttpClients.custom()
                 .setConnectionManager(new PoolingHttpClientConnectionManager())
-                .evictIdleConnections(TimeValue.of(60, TimeUnit.SECONDS))
+                .evictIdleConnections(60, TimeUnit.SECONDS)
                 .build();
         try (CloseableHttpResponse response = client.execute(new HttpGet("http://127.0.0.1:8080/testEvent1"))) {
             return EntityUtils.toString(response.getEntity());
@@ -70,7 +69,7 @@ public class HttpClientDemoController {
     public String wrong2() {
         try (CloseableHttpClient client = HttpClients.custom()
                 .setConnectionManager(new PoolingHttpClientConnectionManager())
-                .evictIdleConnections(TimeValue.of(60, TimeUnit.SECONDS)).build();
+                .evictIdleConnections(60, TimeUnit.SECONDS).build();
              CloseableHttpResponse response = client.execute(new HttpGet("http://127.0.0.1:8080/testEvent1"))) {
             return EntityUtils.toString(response.getEntity());
         } catch (Exception ex) {
