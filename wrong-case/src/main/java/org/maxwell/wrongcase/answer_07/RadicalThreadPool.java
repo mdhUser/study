@@ -17,7 +17,7 @@ public class RadicalThreadPool {
     private static BlockingDeque<Runnable> queue = new LinkedBlockingDeque<Runnable>(10) {
         @Override
         public boolean offer(Runnable runnable) {
-            //先返回false 造成对了已满假象
+            //先返回false 造成队列已满假象
             return false;
         }
     };
@@ -28,8 +28,9 @@ public class RadicalThreadPool {
             queue, new ThreadFactoryBuilder().setNameFormat("radical-threadpool-%d").build(),
             (run, exe) -> {
                 try {
+                    //真正塞入队列
                     if (!exe.getQueue().offer(run, 0, TimeUnit.SECONDS)) {
-                        throw new RejectedExecutionException("ThreadPool queue full,failed to offer" + run.toString());
+                        throw new RejectedExecutionException("ThreadPool queue full,failed to offer " + run.toString());
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();

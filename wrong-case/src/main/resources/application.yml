@@ -22,11 +22,14 @@ sms:
 ribbon:
   MaxAutoRetriesNextServer: 0
 
+#打印事务
 logging:
   level:
     org:
       springframework:
-        jpa: debug
+        orm:
+          jpa: DEBUG
+
 
 spring:
   datasource:

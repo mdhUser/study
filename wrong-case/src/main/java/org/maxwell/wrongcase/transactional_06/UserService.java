@@ -19,16 +19,19 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    @Transactional
+    @Autowired
+    private SubUserService subUserService;
+
+    public int getUsersCount(String name) {
+        return userDao.findByName(name).size();
+    }
+
+
+    @Transactional(rollbackFor = RuntimeException.class)
     public void createUser(String name) {
         userDao.saveAndFlush(new UserEntity(name));
         if (name.contains("test"))
             throw new RuntimeException("invalid name ！");
-    }
-
-
-    public int findUsers(String name) {
-        return userDao.findByName(name).size();
     }
 
 
@@ -43,5 +46,19 @@ public class UserService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
+
+
+    @Transactional
+    public void createUserAndSubUser(String name) {
+        UserEntity user = new UserEntity(name);
+        userDao.save(user);
+        try {
+            subUserService.createSubUserWithException(user);
+        } catch (Exception ex) {
+            // 捕获异常，防止主方法回滚
+            log.error("create sub user error:{}", ex.getMessage());
+        }
+    }
+
 
 }
