@@ -30,8 +30,11 @@ logging:
         orm:
           jpa: DEBUG
 
-
 spring:
+  redis:
+    host: 59.36.170.213
+    port: 6379
+    password: Maxwell
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://59.36.170.213:3306/mydb?connectTimeout=5000&characterEncoding=UTF-8&useSSL=false
@@ -47,5 +50,7 @@ spring:
     hibernate:
       ddl-auto: update
     open-in-view: false
-
+  jackson:
+    serialization:
+      write-enums-using-index: true
 
