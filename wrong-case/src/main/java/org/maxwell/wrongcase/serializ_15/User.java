@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.serializ_12;
+package org.maxwell.wrongcase.serializ_15;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

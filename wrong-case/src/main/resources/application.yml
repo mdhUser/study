@@ -37,7 +37,7 @@ spring:
     password: Maxwell
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://59.36.170.213:3306/mydb?connectTimeout=5000&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://59.36.170.213:3306/mydb?connectTimeout=5000&characterEncoding=UTF-8&useSSL=false&rewriteBatchedStatements=true
     platform: mysql
     hikari:
       password: Maxwell0326

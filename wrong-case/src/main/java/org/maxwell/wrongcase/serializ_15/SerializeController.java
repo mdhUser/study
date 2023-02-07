@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.serializ_12;
+package org.maxwell.wrongcase.serializ_15;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
