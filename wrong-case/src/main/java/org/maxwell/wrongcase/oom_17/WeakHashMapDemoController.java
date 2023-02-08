@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
-import java.util.WeakHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.LongStream;

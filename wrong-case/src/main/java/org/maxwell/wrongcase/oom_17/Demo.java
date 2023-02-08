@@ -5,9 +5,7 @@ import org.maxwell.wrongcase.transactional_06.UserDao;
 import org.maxwell.wrongcase.transactional_06.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ConcurrentReferenceHashMap;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
