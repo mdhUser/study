@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.transactional_06;
+package org.maxwell.wrongcase.spring_19.aop;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Repository
 public interface UserDao extends JpaRepository<UserEntity, Long> {
-
 
     List<UserEntity> findByName(@Param("name") String name);
 

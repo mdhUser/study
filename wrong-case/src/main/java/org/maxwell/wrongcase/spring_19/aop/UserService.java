@@ -1,8 +1,9 @@
 package org.maxwell.wrongcase.spring_19.aop;
 
 import lombok.extern.slf4j.Slf4j;
-import org.maxwell.wrongcase.transactional_06.UserEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Maxwell
@@ -13,11 +14,20 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class UserService {
-    public void createUser(UserEntity entity) {
 
+    @Autowired
+    private UserDao userDao;
+
+    @Transactional
+    @Metrics
+    public void createUser(UserEntity entity) {
+        userDao.save(entity);
+        if (entity.getName().contains("test"))
+            throw new RuntimeException("invalid username!");
     }
 
     public int getUserCount(String name) {
-        return 0;
+        return userDao.findByName(name).size();
     }
+
 }

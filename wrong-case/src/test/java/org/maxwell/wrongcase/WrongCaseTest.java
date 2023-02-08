@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 /**
@@ -30,6 +31,12 @@ public class WrongCaseTest {
         data.forEach((k, v) -> {
             System.out.println(k + "=" + v);
         });
+    }
+
+
+    @Test
+    public void test01(){
+        System.out.println(IntStream.rangeClosed(1, 100).boxed().reduce(0, Integer::sum));
     }
 
 }

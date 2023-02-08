@@ -8,6 +8,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -25,6 +27,7 @@ import static java.util.stream.Collectors.toMap;
 @Aspect
 @Component
 @Slf4j
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class MetricsAspect {
 
     //让Spring帮我们注入ObjectMapper，以方便通过JSON序列化来记录方法入参和出参
@@ -44,7 +47,8 @@ public class MetricsAspect {
     }
 
     //@annotation指示器实现对标记了Metrics注解的方法进行匹配
-    @Pointcut("within(@org.maxwell.wrongcase.spring_19.aop.Metrics *)")
+    //@Pointcut("within(@org.maxwell.wrongcase.spring_19.aop.Metrics *)")
+    @Pointcut("@annotation(org.maxwell.wrongcase.spring_19.aop.Metrics)")
     public void withMetricsAnnotation() {
     }
 
@@ -53,7 +57,7 @@ public class MetricsAspect {
     public void controllerBean() {
     }
 
-    @Around("controllerBean() || withMetricsAnnotation())")
+    @Around("withMetricsAnnotation()||controllerBean()")
     public Object metrics(ProceedingJoinPoint pjp) throws Throwable {
         //通过连接点获取方法签名和方法上Metrics注解，并根据方法签名生成日志中要输出的方法定义描述
         MethodSignature signature = (MethodSignature) pjp.getSignature();
@@ -64,17 +68,17 @@ public class MetricsAspect {
         // 虽然可以手动实例化一个@Metrics注解的实例出来，但为了节省代码行数，我们通过在一个内部类上定义@Metrics注解方式，
         // 然后通过反射获取注解的小技巧，来获得一个默认的@Metrics注解的实例
         if (metrics == null) {
-            @Metrics
-            final class c {
-            }
-            metrics = c.class.getAnnotation(Metrics.class);
+            //@Metrics
+            //final class c {
+            //}
+            //metrics = c.class.getAnnotation(Metrics.class);
+            metrics = signature.getMethod().getDeclaringClass().getAnnotation(Metrics.class);
         }
         //尝试从请求上下文（如果有的话）获得请求URL，以方便定位问题
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes != null) {
             HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
-            if (request != null)
-                name += String.format("【%s】", request.getRequestURL().toString());
+            name += String.format("【%s】", request.getRequestURL().toString());
         }
         //实现的是入参的日志输出
         if (metrics.logParameters())
