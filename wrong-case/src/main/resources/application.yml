@@ -14,9 +14,16 @@ feign:
       cl:
         read-timeout: 2000
         connect-timeout: 2000
+
+#指定单个client的负载均衡列表
 sms:
   ribbon:
     listOfServers: localhost:8080,localhost:8888
+
+client:
+  ribbon:
+    listOfServers: localhost:8080,localhost:8081
+
 
 #禁止ribbon自动失败重试
 ribbon:
@@ -53,4 +60,14 @@ spring:
   jackson:
     serialization:
       write-enums-using-index: true
+
+#  aop:
+#    proxy-target-class: false
+
+user:
+  name: Maxwell Mao
+
+management:
+  server:
+    port: 46478
 

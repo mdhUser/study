@@ -20,6 +20,7 @@ import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toMap;
@@ -47,8 +48,8 @@ public class MetricsAspect {
     }
 
     //@annotation指示器实现对标记了Metrics注解的方法进行匹配
-    //@Pointcut("within(@org.maxwell.wrongcase.spring_19.aop.Metrics *)")
-    @Pointcut("@annotation(org.maxwell.wrongcase.spring_19.aop.Metrics)")
+    @Pointcut("within(@org.maxwell.wrongcase.spring_19.aop.Metrics *) || @annotation(org.maxwell.wrongcase.spring_19.aop.Metrics)")
+    //@Pointcut("@annotation(org.maxwell.wrongcase.spring_19.aop.Metrics)")
     public void withMetricsAnnotation() {
     }
 
@@ -68,11 +69,15 @@ public class MetricsAspect {
         // 虽然可以手动实例化一个@Metrics注解的实例出来，但为了节省代码行数，我们通过在一个内部类上定义@Metrics注解方式，
         // 然后通过反射获取注解的小技巧，来获得一个默认的@Metrics注解的实例
         if (metrics == null) {
-            //@Metrics
-            //final class c {
-            //}
-            //metrics = c.class.getAnnotation(Metrics.class);
-            metrics = signature.getMethod().getDeclaringClass().getAnnotation(Metrics.class);
+            @Metrics
+            final class c {
+            }
+            Metrics annotation = signature.getMethod().getDeclaringClass().getAnnotation(Metrics.class);
+            if (Optional.ofNullable(annotation).isPresent()) {
+                metrics = annotation;
+            } else {
+                metrics = c.class.getAnnotation(Metrics.class);
+            }
         }
         //尝试从请求上下文（如果有的话）获得请求URL，以方便定位问题
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
