@@ -19,13 +19,13 @@ public class LambdaDemo6 {
 
 //        for (int i = 0; i < 10; i++) {
 ////            List list = new ArrayList();
-//            //todo 要用CopyOnWriteArrayList防止线程阻塞
+//            //要用CopyOnWriteArrayList防止线程阻塞
 //            List list = new CopyOnWriteArrayList();
 //            IntStream.range(0,100).parallel().forEach(list::add);
 //            System.out.println(list.size());
 //        }
 
-        //todo reduce用法(把集合元素按照逻辑不断减少返回唯一元素)
+        //reduce用法(把集合元素按照逻辑不断减少返回唯一元素)
         int value = Stream.of(1, 2, 3, 4, 5).reduce((x, y) -> x + y).get();
         System.out.println("value = " + value);
 

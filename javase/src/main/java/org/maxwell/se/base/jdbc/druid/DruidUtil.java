@@ -1,7 +1,5 @@
 package org.maxwell.se.base.jdbc.druid;
 
-import com.alibaba.druid.pool.DruidDataSourceFactory;
-
 import javax.sql.DataSource;
 import java.io.InputStream;
 import java.util.Properties;
@@ -22,7 +20,7 @@ public class DruidUtil {
         InputStream in = DruidUtil.class.getClassLoader().getResourceAsStream("druid.properties");
         try {
             properties.load(in);
-            dataSource=DruidDataSourceFactory.createDataSource(properties);
+            //dataSource=DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             e.printStackTrace();
         }
