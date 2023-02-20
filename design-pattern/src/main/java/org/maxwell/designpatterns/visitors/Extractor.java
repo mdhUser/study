@@ -12,7 +12,6 @@ public class Extractor implements Visitor {
     public void visit(PdfFile pdfFile) {
         System.out.println("Extract Pdf.");
     }
-
     @Override
     public void visit(ExcelFile excelFile) {
         System.out.println("Extract Excel.");

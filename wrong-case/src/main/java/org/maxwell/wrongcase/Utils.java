@@ -2,6 +2,11 @@ package org.maxwell.wrongcase;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -49,6 +54,19 @@ public class Utils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public static void main(String[] args) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        System.out.println(formatter.format(LocalDateTime.now()));
+
+        LocalDateTime parse = LocalDateTime.parse("20230217211649252", formatter);
+        System.out.println(parse);
+
+        Date date = Date.from(parse.atZone(ZoneId.systemDefault()).toInstant());
+        System.out.println(date);
+
     }
 
 }

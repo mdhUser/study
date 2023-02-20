@@ -11,14 +11,12 @@ import java.math.RoundingMode;
  */
 public enum BankAPIFieldType implements IFormatter {
 
-
     S {
         @Override
         public String format(Object value, BankAPIField bankAPIField) {
             return String.format("%-" + bankAPIField.length() + "s", value.toString()).replace(" ", "_");
         }
     },
-
     N {
         //stringBuilder.append(String.format("%" + bankAPIField.length() + "s", value.toString()).replace(' ', '0'));
         @Override
