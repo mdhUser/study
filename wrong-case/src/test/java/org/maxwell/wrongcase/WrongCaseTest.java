@@ -15,7 +15,7 @@ import java.util.stream.LongStream;
  * @email: maodihui@foxmail.com
  * @date: 2023/1/1 20:30
  */
-public class WrongCaseTest {
+public class  WrongCaseTest {
 
     //帮助方法，用来获得一个指定元素数量模拟数据的ConcurrentHashMap
     private ConcurrentHashMap<String, Long> getData(int count) {

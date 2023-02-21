@@ -33,7 +33,7 @@ public class RedisConfig {
         jedisPoolConfig.setMaxIdle(6);
         jedisPoolConfig.setMinIdle(2);
         jedisPoolConfig.setMaxTotal(10);
-        //设置请求超时时间
+        //设置请求连接池链接超时时间
         jedisPoolConfig.setMaxWaitMillis(10000);
         JedisPool jedisPool = new JedisPool(jedisPoolConfig, HOST, PORT, 5000, AUTH);
         log.info("JedisPool连接成功：{} \t port:{}", HOST, PORT);
