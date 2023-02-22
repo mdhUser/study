@@ -9,3 +9,22 @@ spring:
         max-idle: 8
         min-idle: 2
         max-wait: 100 #连接等待时间
+        time-between-eviction-runs: 10s
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://59.36.170.213:3306/hmdp?connectTimeout=5000&characterEncoding=UTF-8&useSSL=false&rewriteBatchedStatements=true
+    hikari:
+      password: Maxwell0326
+      username: root
+      maximum-pool-size: 100
+      #请求连接超时
+      connection-timeout: 10000
+  jackson:
+    default-property-inclusion: non_null # JSON处理时忽略空字段
+mybatis-plus:
+  type-aliases-package: org.maxwell.hmredis.entity # 别名扫描包
+logging:
+  level:
+    com.hmdp: debug
+  pattern:
+    dateformat: mm:ss.SSS

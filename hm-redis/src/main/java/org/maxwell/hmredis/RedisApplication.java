@@ -1,5 +1,6 @@
 package org.maxwell.hmredis;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  * @email: maodihui@foxmail.com
  * @date: 2023/2/20 21:55
  */
+@MapperScan("org.maxwell.hmredis.mapper")
 @SpringBootApplication
 public class RedisApplication {
 

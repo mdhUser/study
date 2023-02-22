@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.cache_23;
+package org.maxwell.wrongcase.cache_23.concurrent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

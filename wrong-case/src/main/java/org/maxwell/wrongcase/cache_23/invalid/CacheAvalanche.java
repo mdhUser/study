@@ -1,14 +1,14 @@
-package org.maxwell.wrongcase.cache_23;
+package org.maxwell.wrongcase.cache_23.invalid;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
  */
 @Slf4j
 @RestController
-public class Case {
+public class CacheAvalanche {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -45,13 +45,43 @@ public class Case {
     @PostConstruct
     public void rightInit1() {
         //这次缓存的过期时间是30秒+10秒内的随机延迟
-        IntStream.rangeClosed(1, 1000).forEach(i -> stringRedisTemplate.opsForValue().set("city" + i,
-                getCityFromDb(i), 100 + ThreadLocalRandom.current().nextInt(10), TimeUnit.SECONDS));
+        IntStream.rangeClosed(1, 1000).forEach(i -> stringRedisTemplate.opsForValue().set(
+                "city" + i, getCityFromDb(i), 100 + ThreadLocalRandom.current().nextInt(10), TimeUnit.SECONDS));
         log.info("Cache init finished");
         //同样1秒一次输出数据库QPS：
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> {
             log.info("DB QPS : {}", atomicInteger.getAndSet(0));
         }, 0, 1, TimeUnit.SECONDS);
+    }
+
+
+
+    @PostConstruct
+    public void rightInit2() throws InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        //每隔30秒全量更新一次缓存
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> {
+            IntStream.rangeClosed(1, 1000).forEach(i -> {
+                String data = getCityFromDb(i);
+                //模拟更新缓存需要一定的时间
+                try {
+                    TimeUnit.MILLISECONDS.sleep(20);
+                } catch (InterruptedException e) { }
+                if (!StringUtils.isEmpty(data)) {
+                    //缓存永不过期，被动更新
+                    stringRedisTemplate.opsForValue().set("city" + i, data);
+                }
+            });
+            log.info("Cache update finished");
+            //启动程序的时候需要等待首次更新缓存完成
+            countDownLatch.countDown();
+        }, 0, 30, TimeUnit.SECONDS);
+
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> {
+            log.info("DB QPS : {}", atomicInteger.getAndSet(0));
+        }, 0, 1, TimeUnit.SECONDS);
+
+        countDownLatch.await();
     }
 
     @GetMapping("city")

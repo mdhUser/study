@@ -25,6 +25,9 @@ public class RedisTest {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
 
     @Test
     void testString() {
@@ -38,7 +41,6 @@ public class RedisTest {
         System.out.println(o);
     }
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     void testStrTemplate() throws JsonProcessingException {
