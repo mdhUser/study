@@ -28,8 +28,6 @@ public class CacheBreakDown {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @Autowired
-    private ;
     private AtomicInteger atomicInteger = new AtomicInteger(0);
 
     @PostConstruct

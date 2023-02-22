@@ -1,3 +1,5 @@
+server:
+  port: 4567
 spring:
   redis:
     host: 59.36.170.213
