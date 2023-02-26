@@ -2,6 +2,8 @@ package org.maxwell.wrongcase.cache_23.concurrent;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,8 @@ import javax.annotation.PostConstruct;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.maxwell.wrongcase.cache_23.RedisConstant.HOTSPOT;
 
 /**
  * @author Maxwell
@@ -26,14 +30,18 @@ public class CacheBreakDown {
 
 
     @Autowired
+    private RedissonClient redissonClient;
+
+    @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
 
     private AtomicInteger atomicInteger = new AtomicInteger(0);
 
     @PostConstruct
     public void init() {
         //初始化一个热点数据到Redis中，过期时间设置为5秒
-        stringRedisTemplate.opsForValue().set("hotsopt", getExpensiveData(), 5, TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(HOTSPOT, getExpensiveData(), 5, TimeUnit.SECONDS);
         //每隔1秒输出一下回源的QPS
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> {
             log.info("DB QPS : {}", atomicInteger.getAndSet(0));
@@ -47,14 +55,36 @@ public class CacheBreakDown {
 
     @GetMapping("wrong")
     public String wrong() {
-        String data = stringRedisTemplate.opsForValue().get("hotsopt");
+        String data = stringRedisTemplate.opsForValue().get(HOTSPOT);
         if (StringUtils.isEmpty(data)) {
             data = getExpensiveData();
             //重新加入缓存，过期时间还是5秒
-            stringRedisTemplate.opsForValue().set("hotsopt", data, 5, TimeUnit.SECONDS);
+            stringRedisTemplate.opsForValue().set(HOTSPOT, data, 5, TimeUnit.SECONDS);
         }
         return data;
     }
 
+
+    @GetMapping("right")
+    public String right() {
+        String data = stringRedisTemplate.opsForValue().get(HOTSPOT);
+        if (StringUtils.isBlank(data)) {
+            RLock locker = redissonClient.getLock("locker");
+            //获取分布式锁
+            if (locker.tryLock()) {
+                try {
+                    data = stringRedisTemplate.opsForValue().get(HOTSPOT);
+                    if (StringUtils.isBlank(data)) {
+                        data = getExpensiveData();
+                        stringRedisTemplate.opsForValue().set(HOTSPOT, data, 5, TimeUnit.SECONDS);
+                    }
+                } finally {
+                    //释放锁
+                    locker.unlock();
+                }
+            }
+        }
+        return data;
+    }
 
 }

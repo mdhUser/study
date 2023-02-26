@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +24,7 @@ import java.util.stream.IntStream;
  */
 @Slf4j
 @RestController
+@RequestMapping("cacheavalanche")
 public class CacheAvalanche {
 
     @Autowired
@@ -45,7 +47,7 @@ public class CacheAvalanche {
     @PostConstruct
     public void rightInit1() {
         //这次缓存的过期时间是30秒+10秒内的随机延迟
-        IntStream.rangeClosed(1, 1000).forEach(i -> stringRedisTemplate.opsForValue().set(
+        IntStream.rangeClosed(1, 100).forEach(i -> stringRedisTemplate.opsForValue().set(
                 "city" + i, getCityFromDb(i), 100 + ThreadLocalRandom.current().nextInt(10), TimeUnit.SECONDS));
         log.info("Cache init finished");
         //同样1秒一次输出数据库QPS：
@@ -55,8 +57,7 @@ public class CacheAvalanche {
     }
 
 
-
-    @PostConstruct
+    //@PostConstruct
     public void rightInit2() throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(1);
         //每隔30秒全量更新一次缓存
@@ -66,7 +67,8 @@ public class CacheAvalanche {
                 //模拟更新缓存需要一定的时间
                 try {
                     TimeUnit.MILLISECONDS.sleep(20);
-                } catch (InterruptedException e) { }
+                } catch (InterruptedException e) {
+                }
                 if (!StringUtils.isEmpty(data)) {
                     //缓存永不过期，被动更新
                     stringRedisTemplate.opsForValue().set("city" + i, data);
@@ -87,7 +89,7 @@ public class CacheAvalanche {
     @GetMapping("city")
     public String city() {
         //随机查询一个城市
-        int id = ThreadLocalRandom.current().nextInt(1000) + 1;
+        int id = ThreadLocalRandom.current().nextInt(100) + 1;
         String key = "city" + id;
         String data = stringRedisTemplate.opsForValue().get(key);
         if (data == null) {
@@ -95,7 +97,7 @@ public class CacheAvalanche {
             data = getCityFromDb(id);
             if (!StringUtils.isEmpty(data))
                 //缓存30秒过期
-                stringRedisTemplate.opsForValue().set(key, data, 30, TimeUnit.SECONDS);
+                stringRedisTemplate.opsForValue().set(key, data, 10, TimeUnit.SECONDS);
         }
         return data;
     }
@@ -103,7 +105,7 @@ public class CacheAvalanche {
     private String getCityFromDb(int cityId) {
         //模拟查询数据库，查一次增加计数器加一
         atomicInteger.incrementAndGet();
-        return "citydata" + cityId + "-" + System.currentTimeMillis();
+        return "citydata-" + cityId + "-" + System.currentTimeMillis();
     }
 
 }
