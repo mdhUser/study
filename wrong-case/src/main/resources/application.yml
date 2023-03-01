@@ -69,5 +69,10 @@ user:
 
 management:
   server:
-    port: 46478
+    port: 45678
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /admin
 
