@@ -36,7 +36,6 @@ logging:
       springframework:
         orm:
           jpa: DEBUG
-
 spring:
   redis:
     host: 59.36.170.213
@@ -60,6 +59,9 @@ spring:
   jackson:
     serialization:
       write-enums-using-index: true
+  #开启jmx
+  jmx:
+    enabled: true
 
 #  aop:
 #    proxy-target-class: false
@@ -67,7 +69,11 @@ spring:
 user:
   name: Maxwell Mao
 
+#actuator 相关配置
 management:
+  endpoint:
+    health:
+      show-details: always
   server:
     port: 45678
   endpoints:
@@ -75,4 +81,10 @@ management:
       exposure:
         include: "*"
       base-path: /admin
+  metrics:
+    export:
+      influx:
+        enabled: true
+        uri: http://localhost:8086
+        step: 1S
 
