@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.actuator_24;
+package org.maxwell.wrongcase.actuator_24.metric;
 
 import org.maxwell.wrongcase.actuator_24.utils.ThreadPoolProvider;
 import org.springframework.boot.actuate.info.Info;

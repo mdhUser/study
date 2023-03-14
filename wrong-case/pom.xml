@@ -120,11 +120,11 @@
             <artifactId>jolokia-core</artifactId>
         </dependency>
 
-        <!--micrometer-->
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-influx</artifactId>
-        </dependency>
+        <!--Micrometer-->
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-registry-influx</artifactId>-->
+<!--        </dependency>-->
 
         <!--amqp 支持-->
         <dependency>

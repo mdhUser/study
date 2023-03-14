@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.actuator_24;
+package org.maxwell.wrongcase.actuator_24.metric;
 
 import lombok.extern.slf4j.Slf4j;
 import org.maxwell.wrongcase.actuator_24.pojo.User;

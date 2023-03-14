@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.actuator_24;
+package org.maxwell.wrongcase.actuator_24.metric;
 
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;

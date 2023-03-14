@@ -62,6 +62,11 @@ spring:
   #开启jmx
   jmx:
     enabled: true
+  rabbitmq:
+    host: 59.36.170.213
+    port: 5672
+    username: Maxwell
+    password: GoddessWangJie
 
 #  aop:
 #    proxy-target-class: false
@@ -81,10 +86,10 @@ management:
       exposure:
         include: "*"
       base-path: /admin
-  metrics:
-    export:
-      influx:
-        enabled: true
-        uri: http://localhost:8086
-        step: 1S
+#  metrics:
+#    export:
+#      influx:
+#        enabled: true
+#        uri: http://localhost:8086
+#        step: 1S
 
