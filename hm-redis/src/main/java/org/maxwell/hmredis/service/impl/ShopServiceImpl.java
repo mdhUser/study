@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import static org.maxwell.hmredis.utils.RedisConstants.*;
@@ -44,6 +45,7 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IS
 
     @Resource
     private CacheClient cacheClient;
+
 
     @Override
     public Result queryById(Long id) {

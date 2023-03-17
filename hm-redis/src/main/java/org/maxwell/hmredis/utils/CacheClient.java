@@ -29,10 +29,26 @@ public class CacheClient {
         this.stringRedisTemplate = stringRedisTemplate;
     }
 
+    /**
+     * 创建ttl kv
+     *
+     * @param key
+     * @param value
+     * @param time
+     * @param unit
+     */
     public void set(String key, Object value, Long time, TimeUnit unit) {
         stringRedisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(value), time, unit);
     }
 
+    /**
+     * 创建逻辑过期kv
+     *
+     * @param key
+     * @param value
+     * @param time
+     * @param unit
+     */
     public void setWithLogicalExpire(String key, Object value, Long time, TimeUnit unit) {
         // 设置逻辑过期
         RedisData redisData = new RedisData();
@@ -42,8 +58,8 @@ public class CacheClient {
         stringRedisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(redisData));
     }
 
-    public <R,ID> R queryWithPassThrough(
-            String keyPrefix, ID id, Class<R> type, Function<ID, R> dbFallback, Long time, TimeUnit unit){
+    public <R, ID> R queryWithPassThrough(
+            String keyPrefix, ID id, Class<R> type, Function<ID, R> dbFallback, Long time, TimeUnit unit) {
         String key = keyPrefix + id;
         // 1.从redis查询商铺缓存
         String json = stringRedisTemplate.opsForValue().get(key);
@@ -87,7 +103,7 @@ public class CacheClient {
         R r = JSONUtil.toBean((JSONObject) redisData.getData(), type);
         LocalDateTime expireTime = redisData.getExpireTime();
         // 5.判断是否过期
-        if(expireTime.isAfter(LocalDateTime.now())) {
+        if (expireTime.isAfter(LocalDateTime.now())) {
             // 5.1.未过期，直接返回店铺信息
             return r;
         }
@@ -97,7 +113,7 @@ public class CacheClient {
         String lockKey = LOCK_SHOP_KEY + id;
         boolean isLock = tryLock(lockKey);
         // 6.2.判断是否获取锁成功
-        if (isLock){
+        if (isLock) {
             // 6.3.成功，开启独立线程，实现缓存重建
             CACHE_REBUILD_EXECUTOR.submit(() -> {
                 try {
@@ -107,7 +123,7 @@ public class CacheClient {
                     this.setWithLogicalExpire(key, newR, time, unit);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
-                }finally {
+                } finally {
                     // 释放锁
                     unlock(lockKey);
                 }
@@ -136,7 +152,7 @@ public class CacheClient {
         // 4.实现缓存重建
         // 4.1.获取互斥锁
         String lockKey = LOCK_SHOP_KEY + id;
-        R r = null;
+        R r;
         try {
             boolean isLock = tryLock(lockKey);
             // 4.2.判断是否获取成功
@@ -158,7 +174,7 @@ public class CacheClient {
             this.set(key, r, time, unit);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             // 7.释放锁
             unlock(lockKey);
         }

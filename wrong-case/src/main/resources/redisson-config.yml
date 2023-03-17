@@ -1,8 +1,8 @@
 ---
 singleServerConfig:
-  idleConnectionTimeout: 10000
-  connectTimeout: 10000
-  timeout: 3000
+  idleConnectionTimeout: 100000
+  connectTimeout: 100000
+  timeout: 100000
   retryAttempts: 3
   retryInterval: 1500
   password: Maxwell
@@ -15,7 +15,7 @@ singleServerConfig:
   connectionPoolSize: 64
   database: 0
   dnsMonitoringInterval: 5000
-threads: 0
-nettyThreads: 0
+threads: 10
+nettyThreads: 10
 codec: !<org.redisson.codec.JsonJacksonCodec> {}
 transportMode: NIO
