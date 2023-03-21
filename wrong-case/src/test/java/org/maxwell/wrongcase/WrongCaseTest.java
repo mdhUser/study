@@ -2,6 +2,7 @@ package org.maxwell.wrongcase;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -37,6 +38,12 @@ public class  WrongCaseTest {
     @Test
     public void test01(){
         System.out.println(IntStream.rangeClosed(1, 100).boxed().reduce(0, Integer::sum));
+    }
+
+
+    @Test
+    public void testBigDecimal(){
+        System.out.println(BigDecimal.valueOf(-200).add(BigDecimal.valueOf(-200).abs()));
     }
 
 }

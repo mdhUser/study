@@ -1,4 +1,4 @@
-server:
+ server:
   port: 4567
 spring:
   redis:

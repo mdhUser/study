@@ -39,4 +39,10 @@ public class RedisIdWorker {
         // 3.拼接并返回
         return timestamp << COUNT_BITS | count;
     }
+
+    public static void main(String[] args) {
+        LocalDateTime of = LocalDateTime.of(2022, 1, 1, 0, 0, 0);
+        System.out.println("起始时间："+of.toEpochSecond(ZoneOffset.UTC));
+    }
+
 }

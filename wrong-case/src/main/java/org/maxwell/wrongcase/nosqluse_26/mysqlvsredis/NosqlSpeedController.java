@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.nosqluse_26;
+package org.maxwell.wrongcase.nosqluse_26.mysqlvsredis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date: 2023/3/15 15:42
  */
 @Slf4j
-@RequestMapping("nosql")
+@RequestMapping("redisvsmysql")
 @RestController
 public class NosqlSpeedController {
 
@@ -38,6 +38,16 @@ public class NosqlSpeedController {
         //根据随机name来查data，name字段有索引，结果应该等于PAYLOAD
         Assert.assertTrue(jdbcTemplate.queryForObject("SELECT data FROM `r` WHERE name=?", new Object[]{("item" + (ThreadLocalRandom.current().nextInt(CommonMistakesApplication.ROWS) + 1))}, String.class)
                 .equals(CommonMistakesApplication.PAYLOAD));
+    }
+
+
+    @GetMapping("redis2")
+    public void redis2() {
+        Assert.assertTrue(stringRedisTemplate.keys("item71*").size() == 1111);
+    }
+    @GetMapping("mysql2")
+    public void mysql2() {
+        Assert.assertTrue(jdbcTemplate.queryForList("SELECT name FROM `r` WHERE name LIKE 'item71%'", String.class).size() == 1111);
     }
 
 

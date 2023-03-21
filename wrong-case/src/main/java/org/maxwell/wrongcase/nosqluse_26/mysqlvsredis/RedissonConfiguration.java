@@ -1,4 +1,4 @@
-package org.maxwell.wrongcase.nosqluse_26.config;
+package org.maxwell.wrongcase.nosqluse_26.mysqlvsredis;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

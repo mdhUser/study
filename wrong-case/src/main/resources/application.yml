@@ -89,7 +89,9 @@ management:
 #  metrics:
 #    export:
 #      influx:
-#        enabled: true
-#        uri: http://localhost:8086
+#        enabled: false
+#        uri: http://59.36.170.213:8086
 #        step: 1S
+#        password: maodihuiMaster
+#        user-name: Maxwell
 
