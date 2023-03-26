@@ -1,4 +1,4 @@
-package org.maxwell.designpatterns.callback;
+package org.maxwell.designpatterns.callback.sync;
 
 /**
  * @author Maxwell

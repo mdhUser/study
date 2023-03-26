@@ -23,20 +23,20 @@ public class RedisApplication {
         SpringApplication.run(RedisApplication.class, args);
     }
 
-    @Bean
-    public <T> RedisTemplate<String, T> redisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<String, T> template = new RedisTemplate<>();
-        //设置连接工厂
-        template.setConnectionFactory(connectionFactory);
-        //创建json序列化工具
-        GenericJackson2JsonRedisSerializer jsonRedisSerializer = new GenericJackson2JsonRedisSerializer();
-        //设置key的序列化
-        template.setKeySerializer(RedisSerializer.string());
-        template.setHashKeySerializer(RedisSerializer.string());
-        template.setValueSerializer(jsonRedisSerializer);
-        template.setHashValueSerializer(jsonRedisSerializer);
-        return template;
-    }
+    //@Bean
+    //public <T> RedisTemplate<String, T> redisTemplate(RedisConnectionFactory connectionFactory) {
+    //    RedisTemplate<String, T> template = new RedisTemplate<>();
+    //    //设置连接工厂
+    //    template.setConnectionFactory(connectionFactory);
+    //    //创建json序列化工具
+    //    GenericJackson2JsonRedisSerializer jsonRedisSerializer = new GenericJackson2JsonRedisSerializer();
+    //    //设置key的序列化
+    //    template.setKeySerializer(RedisSerializer.string());
+    //    template.setHashKeySerializer(RedisSerializer.string());
+    //    template.setValueSerializer(jsonRedisSerializer);
+    //    template.setHashValueSerializer(jsonRedisSerializer);
+    //    return template;
+    //}
 
 
 }

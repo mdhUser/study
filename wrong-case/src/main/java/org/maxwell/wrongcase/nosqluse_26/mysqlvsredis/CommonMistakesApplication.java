@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.StandardEnvironment;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,7 +40,7 @@ public class CommonMistakesApplication {
         //使用-Dspring.profiles.active=init启动程序进行初始化
         if (Arrays.stream(standardEnvironment.getActiveProfiles()).anyMatch(s -> s.equalsIgnoreCase("init"))) {
             initRedis();
-            initMySQL();
+            //initMySQL();
         }
     }
 
@@ -75,7 +76,13 @@ public class CommonMistakesApplication {
 
     //填充数据到Redis
     private void initRedis() {
-        IntStream.rangeClosed(1, ROWS).forEach(i -> stringRedisTemplate.opsForValue().set("item" + i, PAYLOAD));
+        //IntStream.rangeClosed(1, ROWS).forEach(i -> stringRedisTemplate.opsForValue().set("item" + i, PAYLOAD));
+        stringRedisTemplate.executePipelined((RedisCallback<?>) connection -> {
+            IntStream.rangeClosed(1, ROWS).forEach(i -> {
+                connection.set(("item"+i).getBytes(),PAYLOAD.getBytes());
+            });
+            return null;
+        });
         log.info("init redis finished with count {}", stringRedisTemplate.keys("item*"));
     }
 }
