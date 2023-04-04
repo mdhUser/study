@@ -2,6 +2,7 @@ package org.maxwell.hmredis;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.maxwell.hmredis.pojo.User;
 import org.redisson.api.RLock;
@@ -11,15 +12,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -28,6 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @email: maodihui@foxmail.com
  * @date: 2023/2/20 21:59
  */
+@Slf4j
 @SpringBootTest
 public class RedisTest {
 
@@ -146,6 +147,39 @@ public class RedisTest {
         script.setScriptText("return redis.call('del',unpack(KEYS))");
         script.setResultType(Long.class);
         stringRedisTemplate.execute(script, new ArrayList<>(keys));
+    }
+
+
+
+    @Test
+    void testReentrant() throws InterruptedException {
+        RLock lock = redissonClient.getLock("lock");
+
+        boolean isLock = lock.tryLock(1,TimeUnit.SECONDS);
+        if (!isLock){
+            log.info("获取锁失败，1");
+        }
+        try {
+            log.info("获取锁成功，1");
+            extracted(lock);
+        } finally {
+            log.info("释放锁，1");
+            lock.unlock();
+        }
+    }
+
+    private void extracted(RLock lock) {
+        boolean isLock = lock.tryLock();
+        if (!isLock){
+            log.info("获取锁失败，2");
+        }
+        try {
+            log.info("获取锁成功，2");
+
+        } finally {
+            log.info("释放锁，2");
+            lock.unlock();
+        }
     }
 
 
