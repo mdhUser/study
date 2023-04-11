@@ -1,5 +1,7 @@
 package org.maxwell.wrongcase;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,14 +13,14 @@ import java.util.regex.Pattern;
  */
 public class Test {
     static Pattern p = Pattern.compile("^[0-9]*$");
-
-
     static Pattern regxNums = Pattern.compile("\\d+(\\.\\d+)?");
+    private ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+    //获得JavaScript脚本引擎
+     private ScriptEngine jsEngine = scriptEngineManager.getEngineByName("js");
     public static void main(String[] args) {
 
         Matcher matcher = regxNums.matcher("12.35");
         System.out.println("matcher.find() = " + matcher.matches());
-
 
     }
 

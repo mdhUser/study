@@ -9,8 +9,6 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -125,12 +123,9 @@ public class RedisTest {
     void delAllKeys1() throws InterruptedException {
 
         Set<String> keys = stringRedisTemplate.keys("*");
-        stringRedisTemplate.executePipelined(new RedisCallback<Object>() {
-            @Override
-            public Object doInRedis(RedisConnection connection) throws DataAccessException {
-                keys.forEach(k -> connection.del(k.getBytes()));
-                return null;
-            }
+        stringRedisTemplate.executePipelined((RedisCallback<Object>) connection -> {
+            keys.forEach(k -> connection.del(k.getBytes()));
+            return null;
         });
 
     }
