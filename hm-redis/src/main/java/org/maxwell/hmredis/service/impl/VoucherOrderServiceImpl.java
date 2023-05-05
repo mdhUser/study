@@ -25,6 +25,8 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -61,10 +63,35 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
 
     private static final ExecutorService SECKILL_ORDER_EXECUTOR = Executors.newSingleThreadExecutor();
 
+
+    /**
+     * 阻塞队列
+     *
+     * 如果容器中没有元素线程阻塞等待元素
+     *
+     */
+    private BlockingQueue<VoucherOrder> orderTasks = new ArrayBlockingQueue<>(1024 * 1024);
+
+
     @PostConstruct
     private void init() {
         //SECKILL_ORDER_EXECUTOR.submit(new VoucherOrderHandler());
     }
+
+
+    private class VoucherOrderHandlerDemo implements Runnable{
+        @Override
+        public void run() {
+            try {
+                VoucherOrder take = orderTasks.take();
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
 
     private class VoucherOrderHandler implements Runnable {
         @Override
