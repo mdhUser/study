@@ -82,11 +82,14 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
     private class VoucherOrderHandlerDemo implements Runnable{
         @Override
         public void run() {
-            try {
-                VoucherOrder take = orderTasks.take();
+            while (true) {
+                try {
+                    //1.创建订单
+                    VoucherOrder take = orderTasks.take();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
             }
         }
     }

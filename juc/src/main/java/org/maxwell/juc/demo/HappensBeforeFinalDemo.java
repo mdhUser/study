@@ -13,6 +13,5 @@ public class HappensBeforeFinalDemo {
 
     public HappensBeforeFinalDemo() {
         this.x = 3;
-
     }
 }

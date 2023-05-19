@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
@@ -16,6 +17,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  * @date: 2023/2/20 21:55
  */
 @MapperScan("org.maxwell.hmredis.mapper")
+@EnableAspectJAutoProxy
 @SpringBootApplication
 public class RedisApplication {
 
