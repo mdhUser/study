@@ -48,6 +48,7 @@ public class Allocator {
     synchronized void applyWaitNotify(Object from, Object to) {
         while (als.contains(from) || als.contains(to)) {
             try {
+                //进入休眠状态，并释放锁
                 this.wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

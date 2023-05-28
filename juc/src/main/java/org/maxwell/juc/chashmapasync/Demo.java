@@ -1,6 +1,4 @@
-package org.maxwell.hmredis;
-
-import org.junit.jupiter.api.Test;
+package org.maxwell.juc.chashmapasync;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -23,7 +21,6 @@ public class Demo {
     public static final ConcurrentHashMap<String, Boolean> map = new ConcurrentHashMap<>();
 
 
-    @Test
     public void testMap() throws InterruptedException {
         ExecutorService threadPool = Executors.newFixedThreadPool(10);
         for (int i = 0; i < 10; i++) {

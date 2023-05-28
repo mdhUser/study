@@ -25,10 +25,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * <p>
@@ -63,40 +60,20 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
 
     private static final ExecutorService SECKILL_ORDER_EXECUTOR = Executors.newSingleThreadExecutor();
 
-
     /**
      * 阻塞队列
-     *
+     * <p>
      * 如果容器中没有元素线程阻塞等待元素
-     *
      */
-    private BlockingQueue<VoucherOrder> orderTasks = new ArrayBlockingQueue<>(1024 * 1024);
-
+    private BlockingQueue<VoucherOrder> orderTasks = new LinkedBlockingQueue<>(1024 * 1024);
 
     @PostConstruct
     private void init() {
-        //SECKILL_ORDER_EXECUTOR.submit(new VoucherOrderHandler());
+        SECKILL_ORDER_EXECUTOR.submit(new VoucherOrderHandler());
     }
 
 
-    private class VoucherOrderHandlerDemo implements Runnable{
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    //1.创建订单
-                    VoucherOrder take = orderTasks.take();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }
-        }
-    }
-
-
-
-    private class VoucherOrderHandler implements Runnable {
+    private class  VoucherOrderHandler implements Runnable {
         @Override
         public void run() {
             while (true) {
@@ -190,7 +167,7 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
 
         try {
             // 5.1.查询订单
-            int count = query().eq("user_id", userId).eq("voucher_id", voucherId).count();
+            int count = lambdaQuery().eq(VoucherOrder::getUserId, userId).eq(VoucherOrder::getVoucherId, voucherId).count();
             // 5.2.判断是否存在
             if (count > 0) {
                 // 用户已经购买过了
@@ -233,6 +210,10 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
             // 2.1.不为0 ，代表没有购买资格
             return Result.fail(r == 1 ? "库存不足" : "不能重复下单");
         }
+
+        //阻塞队列
+
+
         // 3.返回订单id
         return Result.ok(orderId);
     }

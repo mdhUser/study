@@ -3,7 +3,8 @@ package org.maxwell.juc.demo;
 import java.util.concurrent.*;
 
 /**
- *  美团面试题1
+ * 美团面试题1
+ *
  * @author Maxwell
  * @description:
  * @email: maodihui@foxmail.com
@@ -12,7 +13,7 @@ import java.util.concurrent.*;
 public class MeituanAdd {
 
 
-    class A {
+    static class A {
         static int a;
 
         static Integer get() {
@@ -22,7 +23,7 @@ public class MeituanAdd {
         }
     }
 
-    class B {
+    static class B {
         static int b;
 
         static Integer get() {
@@ -32,7 +33,7 @@ public class MeituanAdd {
         }
     }
 
-    class C {
+    static class C {
         static int c;
 
         static Integer get() {
@@ -83,6 +84,7 @@ public class MeituanAdd {
     }
 
     ThreadPoolExecutor threadPool = new ThreadPoolExecutor(3, 4, 1, TimeUnit.MINUTES, new ArrayBlockingQueue<>(3));
+
     int addUseTl() throws ExecutionException, InterruptedException {
 
 
