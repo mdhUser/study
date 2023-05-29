@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class  UserController {
 
     @Resource
     private IUserService userService;
