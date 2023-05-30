@@ -63,8 +63,10 @@ public class ThreadPoolDemo {
     public static void main(String[] args) throws InterruptedException {
         testExec();
 //        testSubmit();
-        threadPoolExecutor.shutdown();
+//        threadPoolExecutor.shutdown();
 //        threadPoolExecutor.awaitTermination(10,TimeUnit.SECONDS);
+        threadPoolExecutor.submit(()-> System.out.println("hello this is maxwell !"));
+
     }
 
 }

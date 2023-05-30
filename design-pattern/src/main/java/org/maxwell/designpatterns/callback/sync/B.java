@@ -9,11 +9,11 @@ package org.maxwell.designpatterns.callback.sync;
 public class B {
 
 
-    public void proccess(ICallback callback) {
-        System.out.println("----  执行函数具体逻辑。。。 ----");
+    public static void proccess(ICallback callback) {
+        System.out.println("----  执行函数前逻辑。。。 ----");
         //回调
         callback.methodToCallback();
-        System.out.println("----  执行函数具体逻辑。。。 ----");
+        System.out.println("----  执行函数后逻辑。。。 ----");
     }
 
 }
