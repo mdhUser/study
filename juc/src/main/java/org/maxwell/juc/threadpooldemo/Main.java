@@ -1,7 +1,6 @@
 package org.maxwell.juc.threadpooldemo;
 
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Maxwell
@@ -14,7 +13,6 @@ public class Main {
 
 
     public static void main(String[] args) {
-
         MyThreadPool threadPool = new MyThreadPool(10,new LinkedBlockingQueue<>(2));
         while (true) {
 //            try {

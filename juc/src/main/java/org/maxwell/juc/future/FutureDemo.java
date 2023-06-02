@@ -15,7 +15,7 @@ import java.util.concurrent.*;
 public class FutureDemo {
 
     static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
-            1, 3,
+            2, 3,
             10000,
             TimeUnit.SECONDS,
             new LinkedBlockingQueue<>(10),
@@ -27,6 +27,11 @@ public class FutureDemo {
     );
 
 
+    /**
+     * 使用独立线程
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public static void testFutureTask() throws ExecutionException, InterruptedException {
 
         FutureTask<String> f2 = new FutureTask<String>(new Worker2());
@@ -40,12 +45,18 @@ public class FutureDemo {
         log.info(s);
     }
 
+    /**
+     * 使用线程池实现烧开水
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public static void testTpl() throws ExecutionException, InterruptedException {
         FutureTask<String> f2 = new FutureTask<>(new Worker2());
         FutureTask<String> f1 = new FutureTask<>(new Worker1(f2));
 
-        threadPoolExecutor.execute(f2);
+        //此时如果线程只有一个就会导致永久阻塞等待t2完成
         threadPoolExecutor.execute(f1);
+        threadPoolExecutor.execute(f2);
 
         String s = f1.get();
         log.info(s);
@@ -74,10 +85,9 @@ public class FutureDemo {
             TimeUnit.SECONDS.sleep(1);
             log.info("T1:烧开水。。。");
             TimeUnit.SECONDS.sleep(15);
-            //获取ft2的茶叶
+            //阻塞获取ft2的茶叶
             String tea = ft2.get();
             log.info("T1:拿到茶叶：{}", tea);
-
             log.info("T1:泡茶。。。");
             return "上茶：" + tea;
         }
@@ -85,7 +95,6 @@ public class FutureDemo {
 
 
     static class Worker2 implements Callable<String> {
-
         @Override
         public String call() throws Exception {
             log.info("T2:洗茶壶...");
