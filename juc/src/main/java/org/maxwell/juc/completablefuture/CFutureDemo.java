@@ -1,5 +1,7 @@
 package org.maxwell.juc.completablefuture;
 
+import org.maxwell.juc.Utils;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -13,15 +15,9 @@ import java.util.concurrent.TimeUnit;
 public class CFutureDemo {
 
     public static void main(String[] args) {
-
         //testSerial();
         //testOr();
         //testException();
-
-
-
-
-
     }
 
     private static void testException() {
@@ -35,13 +31,13 @@ public class CFutureDemo {
     private static void testOr() {
         CompletableFuture<String> f1 = CompletableFuture.supplyAsync(() -> {
             int t = getRandom(5, 10);
-            sleep(t, TimeUnit.SECONDS);
+            Utils.sleep(t, TimeUnit.SECONDS);
             return "f1 complete cost %s seconds".formatted(t);
         });
 
         CompletableFuture<String> f2 = CompletableFuture.supplyAsync(() -> {
             int t = getRandom(5, 10);
-            sleep(t, TimeUnit.SECONDS);
+            Utils.sleep(t, TimeUnit.SECONDS);
             return "f2 complete cost %s seconds".formatted(t);
         });
         CompletableFuture<String> or = f1.applyToEither(f2, s -> s);
@@ -52,12 +48,6 @@ public class CFutureDemo {
         return ThreadLocalRandom.current().nextInt(s, e + 1);
     }
 
-    static void sleep(int t, TimeUnit u) {
-        try {
-            u.sleep(t);
-        } catch (InterruptedException e) {
-        }
-    }
 
     private static void testSerial() {
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "Hello World")

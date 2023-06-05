@@ -1,6 +1,7 @@
 package org.maxwell.juc.completablefuture;
 
 import lombok.extern.slf4j.Slf4j;
+import org.maxwell.juc.Utils;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -19,40 +20,32 @@ public class AsyncTeaDemo {
         //任务1
         CompletableFuture<Void> f1 = CompletableFuture.runAsync(() -> {
             log.info("T1:洗水壶...");
-            sleep(1, TimeUnit.SECONDS);
+            Utils.sleep(1, TimeUnit.SECONDS);
             log.info("T1:烧开水...");
-            sleep(15, TimeUnit.SECONDS);
+            Utils.sleep(15, TimeUnit.SECONDS);
         });
 
         CompletableFuture<String> f2 = CompletableFuture.supplyAsync(() -> {
             log.info("T2:洗茶壶...");
-            sleep(1, TimeUnit.SECONDS);
+            Utils.sleep(1, TimeUnit.SECONDS);
             log.info("T2:洗茶杯...");
-            sleep(2, TimeUnit.SECONDS);
+            Utils.sleep(2, TimeUnit.SECONDS);
             log.info("T2:拿茶叶...");
-            sleep(1, TimeUnit.SECONDS);
+            Utils.sleep(1, TimeUnit.SECONDS);
             return "龙井";
         });
 
         //f2
-        CompletableFuture<String> f3 = f1.thenCombine(f2, (__, tf) -> {
-            log.info("T1:拿到茶叶:{}", tf);
+        CompletableFuture<String> f3 = f1.thenCombine(f2, (f1r, f2r) -> {
+            log.info("T1:拿到茶叶:{}", f2r);
             log.info("T1:泡茶...");
-            return "上茶：" + tf;
+            return "上茶：" + f2r;
         });
 
         //同步阻塞获取结果
         String result = f3.join();
         System.out.println(result);
 
-    }
-
-
-    static void sleep(int t, TimeUnit u) {
-        try {
-            u.sleep(t);
-        } catch (InterruptedException e) {
-        }
     }
 
 
