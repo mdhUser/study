@@ -1,4 +1,4 @@
-package org.maxwell.juc.demo.objpool;
+package org.maxwell.juc.semaphore.objpool;
 
 import java.util.List;
 import java.util.Vector;

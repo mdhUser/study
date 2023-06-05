@@ -1,4 +1,4 @@
-package org.maxwell.juc.demo.semaphore;
+package org.maxwell.juc.semaphore;
 
 import java.util.concurrent.Semaphore;
 

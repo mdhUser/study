@@ -1,6 +1,5 @@
-package org.maxwell.juc.demo.cyclicbarrier;
+package org.maxwell.juc.cyclicbarrier;
 
-import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;

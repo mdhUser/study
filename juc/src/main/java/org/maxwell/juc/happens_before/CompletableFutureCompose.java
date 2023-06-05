@@ -1,4 +1,4 @@
-package org.maxwell.juc.demo;
+package org.maxwell.juc.happens_before;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;

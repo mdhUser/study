@@ -1,4 +1,4 @@
-package org.maxwell.juc.demo.unsafe;
+package org.maxwell.juc.unsafe;
 
 import sun.misc.Unsafe;
 

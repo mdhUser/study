@@ -1,4 +1,4 @@
-package org.maxwell.juc.demo.collectionsync;
+package org.maxwell.juc.collectionsync;
 
 import java.util.*;
 
