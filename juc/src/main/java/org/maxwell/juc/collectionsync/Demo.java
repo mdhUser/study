@@ -17,9 +17,6 @@ public class Demo {
         Map<Object, Object> map = Collections.synchronizedMap(new HashMap<>());
         Set<Object> objects = Collections.synchronizedSet(new HashSet<>());
 
-
-
-
     }
 
 
