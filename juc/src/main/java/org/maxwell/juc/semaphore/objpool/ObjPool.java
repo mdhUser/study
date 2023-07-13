@@ -55,8 +55,6 @@ public class ObjPool<T, R> {
     public static void main(String[] args) throws InterruptedException {
 
         ObjPool<String, String> objPool = new ObjPool<>(10,"test");
-
-
         objPool.exec(t->{
             System.out.println(t);
             return t;
