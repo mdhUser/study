@@ -21,7 +21,7 @@ public class Account {
     void transfer(Account target, int amt) {
         // 一次性申请转出账户和转入账户，直到成功
         //while (!allocator.apply(this, target)) ;
-        allocator.applyWaitNotify(target, amt);
+        allocator.applyWaitNotify(this, target);
         try {
             //锁住转出账户
             synchronized (this) {

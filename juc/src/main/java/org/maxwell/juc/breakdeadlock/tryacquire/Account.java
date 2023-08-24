@@ -35,6 +35,7 @@ public class Account {
                     lock.unlock();
                 }
             }
+            //添加随机数避免活锁
             TimeUnit.MILLISECONDS.sleep(randomNum());
         }
     }
