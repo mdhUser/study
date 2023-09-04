@@ -30,6 +30,7 @@ public class StampedLockDemo {
                 }
             }
         } finally {
+            //此处unlock的是stamp
             sl.unlock(stamp);
         }
     }

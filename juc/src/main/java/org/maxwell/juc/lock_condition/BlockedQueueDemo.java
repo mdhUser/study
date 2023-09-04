@@ -1,4 +1,4 @@
-package org.maxwell.juc.queue;
+package org.maxwell.juc.lock_condition;
 
 import java.util.ArrayList;
 import java.util.List;

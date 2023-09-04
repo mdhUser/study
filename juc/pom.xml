@@ -45,6 +45,13 @@
             <version>31.1-jre</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/aysylu/loom -->
+        <dependency>
+            <groupId>aysylu</groupId>
+            <artifactId>loom</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
     </dependencies>
 
 
