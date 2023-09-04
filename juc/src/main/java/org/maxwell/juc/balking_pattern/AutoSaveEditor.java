@@ -31,21 +31,21 @@ public class AutoSaveEditor {
             if (!isEdit) {
                 return;
             }
+            isEdit=false;
         }
 
-        //保存
-        //存储
         saveDesc();
     }
 
+    //保存逻辑
     private void saveDesc() {
     }
 
+    //编辑操作
     void edit() {
-
-        isEdit = true;
-
-
+        synchronized (this) {
+            isEdit = true;
+        }
     }
 
 

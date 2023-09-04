@@ -18,41 +18,43 @@ import java.util.function.Predicate;
  */
 public class GuardedObject<T> {
 
-    T obj;
+    //保证内存可见性
+    volatile T obj;
 
     final Lock lock = new ReentrantLock();
 
     final Condition done = lock.newCondition();
 
-    final int timeout=1;
+    final int timeout = 1;
 
-    final static Map<Object,GuardedObject<?>> gos = new ConcurrentHashMap<>();
+    final static Map<Object, GuardedObject<?>> gos = new ConcurrentHashMap<>();
 
 
     //静态方法创建GuardedObject
-    static <K,E> GuardedObject<E> create(K key){
+    static <K, E> GuardedObject<E> create(K key) {
         GuardedObject<E> go = new GuardedObject<>();
-        gos.put(key,go);
+        gos.put(key, go);
         return go;
     }
 
-    static <K,T> void fireEvent(K key, T obj){
-        GuardedObject go=gos.remove(key);
-        if (go != null){
+    static <K, T> void fireEvent(K key, T obj) {
+        GuardedObject go = gos.remove(key);
+        if (go != null) {
             go.onChanged(obj);
         }
     }
 
     /**
      * 获取受保护方法
+     *
      * @param p
      * @return
      */
-     T get(Predicate<T> p){
+    T get(Predicate<T> p) {
         lock.lock();
         try {
             //mesa管程推荐写法
-            while (!p.test(obj)){
+            while (!p.test(obj)) {
                 done.await(timeout, TimeUnit.SECONDS);
             }
         } catch (InterruptedException e) {
@@ -65,20 +67,16 @@ public class GuardedObject<T> {
     }
 
     //事件通知方法
-    void onChanged(T obj){
+    void onChanged(T obj) {
         lock.lock();
         try {
-            this.obj=obj;
+            this.obj = obj;
             done.signalAll();
         } finally {
             lock.unlock();
         }
 
     }
-
-
-
-
 
 
 }
