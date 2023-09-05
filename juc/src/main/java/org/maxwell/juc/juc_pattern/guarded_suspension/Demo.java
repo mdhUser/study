@@ -1,4 +1,4 @@
-package org.maxwell.juc.guarded_suspension;
+package org.maxwell.juc.juc_pattern.guarded_suspension;
 
 import java.util.Objects;
 

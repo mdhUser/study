@@ -1,4 +1,4 @@
-package org.maxwell.juc.thread_per_message;
+package org.maxwell.juc.juc_pattern.thread_per_message;
 
 import lombok.extern.slf4j.Slf4j;
 

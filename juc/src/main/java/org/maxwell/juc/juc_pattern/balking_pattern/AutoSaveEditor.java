@@ -1,4 +1,4 @@
-package org.maxwell.juc.balking_pattern;
+package org.maxwell.juc.juc_pattern.balking_pattern;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

@@ -1,10 +1,14 @@
-package org.maxwell.juc.thread_pro_cus;
+package org.maxwell.juc.juc_pattern.thread_pro_cus;
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.*;
 
+@Slf4j
 public class Logger {
     //任务队列
     final BlockingQueue<LogMsg> bq = new LinkedBlockingQueue<>(100);
@@ -13,6 +17,9 @@ public class Logger {
     //只需要一个线程写日志
     ExecutorService es =
             Executors.newFixedThreadPool(1);
+
+    //用于终止日志执行的“毒丸”
+    final LogMsg poisonPill = new LogMsg(LEVEL.ERROR, "");
 
     //启动写日志线程
     void start() throws IOException {
@@ -28,8 +35,13 @@ public class Logger {
                 while (true) {
                     LogMsg log = bq.poll(
                             5, TimeUnit.SECONDS);
+
+                    if (poisonPill.equals(log))
+                        break;
+
                     //写日志
                     if (log != null) {
+                        System.out.println("write~~~");
                         writer.write(log.toString());
                         ++curIdx;
                     }
@@ -41,6 +53,7 @@ public class Logger {
                     if (log != null && log.level == LEVEL.ERROR ||
                             curIdx == batchSize ||
                             System.currentTimeMillis() - preFT > 5000) {
+                        System.out.println("flush~~~");
                         writer.flush();
                         curIdx = 0;
                         preFT = System.currentTimeMillis();
@@ -70,6 +83,16 @@ public class Logger {
         bq.put(new LogMsg(
                 LEVEL.ERROR, msg));
     }
+
+    /**
+     * 终止写线程日志
+     */
+    public void stop(){
+        bq.add(poisonPill);
+        es.shutdown();
+    }
+
+
 }
 
 //日志级别
@@ -83,9 +106,22 @@ class LogMsg {
 
     //省略构造函数实现
     LogMsg(LEVEL lvl, String msg) {
+        this.level=lvl;
+        this.msg=msg;
     }
-    //省略toString()实现
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LogMsg logMsg = (LogMsg) o;
+        return level == logMsg.level && Objects.equals(msg, logMsg.msg);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(level, msg);
+    }
 
     @Override
     public String toString() {

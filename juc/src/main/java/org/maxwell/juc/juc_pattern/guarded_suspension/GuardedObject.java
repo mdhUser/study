@@ -1,6 +1,4 @@
-package org.maxwell.juc.guarded_suspension;
-
-import org.checkerframework.checker.units.qual.K;
+package org.maxwell.juc.juc_pattern.guarded_suspension;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

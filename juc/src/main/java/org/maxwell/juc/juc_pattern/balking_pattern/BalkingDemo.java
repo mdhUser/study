@@ -1,4 +1,4 @@
-package org.maxwell.juc.balking_pattern;
+package org.maxwell.juc.juc_pattern.balking_pattern;
 
 /**
  *
