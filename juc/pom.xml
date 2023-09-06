@@ -52,8 +52,21 @@
             <version>1.0.2</version>
         </dependency>
 
-    </dependencies>
+        <!--Netty-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.73.Final</version>
+        </dependency>
 
+        <!--websocket-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+
+    </dependencies>
 
 
 </project>
