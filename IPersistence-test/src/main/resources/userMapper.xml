@@ -1,0 +1,14 @@
+<mapper namespcce="user">
+
+
+    <select id="selectList" resultType="com.lagou.pojo.User" parameterType="">
+        select * from user
+    </select>
+
+
+    <select id="selectOne" resultType="com.lagou.pojo.User" parameterType="">
+        select * from user
+    </select>
+
+
+</mapper>

@@ -1,0 +1,10 @@
+<configuration>
+    <!--数据库连接信息-->
+    <property name="driverClass" value="com.mysql.jc.jdbc.Driver"></property>
+    <property name="jdbcUrl" value="jdbc:mysql:///jpa"></property>
+    <property name="user" value="root"></property>
+    <property name="password" value="Maxwell0326"></property>
+
+    <!--引⼊sql配置信息-->
+    <mapper resource="userMapper.xml"></mapper>
+</configuration>
