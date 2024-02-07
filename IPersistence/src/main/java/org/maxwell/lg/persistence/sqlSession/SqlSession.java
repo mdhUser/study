@@ -1,5 +1,6 @@
 package org.maxwell.lg.persistence.sqlSession;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +13,10 @@ import java.util.Objects;
 public interface SqlSession {
 
     //查询所有
-    <E> List<E> selectList(String statementId, Objects... params);
+    <E> List<E> selectList(String statementId, Object... params) throws SQLException;
+
+    <T> T selectOne(String statementId, Object... params);
+
+    <T> T getMapper(Class<?> clazz);
 
 }
