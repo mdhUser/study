@@ -42,7 +42,7 @@ public class BlockedQueueDemo<T> {
         lock.lock();
         try {
             //队列已满
-            while (queue.size() == 0) {
+            while (queue.isEmpty()) {
                 //等待不满
                 notEmpty.await();
             }
