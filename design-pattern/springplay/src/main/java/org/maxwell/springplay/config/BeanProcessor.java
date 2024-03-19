@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @email: maodihui@foxmail.com
  * @date: 2022/11/29 13:44
  */
-@Component
+//@Component
 public class BeanProcessor implements BeanPostProcessor {
 
     @Override

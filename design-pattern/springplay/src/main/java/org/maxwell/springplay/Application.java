@@ -5,13 +5,17 @@ import org.maxwell.springplay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.ApplicationListener;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class Application implements CommandLineRunner {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication springApplication = new SpringApplication(Application.class);
+//        springApplication.addListeners(new SpringApplicationRunListener());
+        springApplication.run(args);
     }
 
     @Autowired

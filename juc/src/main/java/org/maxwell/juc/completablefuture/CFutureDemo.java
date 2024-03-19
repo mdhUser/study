@@ -16,7 +16,7 @@ public class CFutureDemo {
 
     public static void main(String[] args) {
         //testSerial();
-        //testOr();
+        testOr();
         //testException();
     }
 
@@ -30,13 +30,13 @@ public class CFutureDemo {
 
     private static void testOr() {
         CompletableFuture<String> f1 = CompletableFuture.supplyAsync(() -> {
-            int t = getRandom(5, 10);
+            int t = getRandom(2, 6);
             Utils.sleep(t, TimeUnit.SECONDS);
             return "f1 complete cost %s seconds".formatted(t);
         });
 
         CompletableFuture<String> f2 = CompletableFuture.supplyAsync(() -> {
-            int t = getRandom(5, 10);
+            int t = getRandom(2, 6);
             Utils.sleep(t, TimeUnit.SECONDS);
             return "f2 complete cost %s seconds".formatted(t);
         });
