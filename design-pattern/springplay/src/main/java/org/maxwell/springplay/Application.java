@@ -1,5 +1,7 @@
 package org.maxwell.springplay;
 
+import org.maxwell.springplay.factory.Client;
+import org.maxwell.springplay.factory.ContentType;
 import org.maxwell.springplay.observer.SendMsgObserver;
 import org.maxwell.springplay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationListener;
+
+import java.util.List;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class Application implements CommandLineRunner {
@@ -24,10 +28,11 @@ public class Application implements CommandLineRunner {
     @Autowired
     private SendMsgObserver sendMsgObserver;
 
+    @Autowired
+    private Client client;
+
     @Override
     public void run(String... args) throws Exception {
-        //System.out.println(userService.out("FU"));
-        //sendMsgObserver.notify("bizType1", "业务1的内容");
-        //sendMsgObserver.notify("bizType2", "业务2的内容");
+        List all = client.getAll(ContentType.JSON);
     }
 }
